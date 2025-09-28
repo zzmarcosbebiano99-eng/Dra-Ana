@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treino Residência Veterinária</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    p.subtitle {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: left;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border-top: 4px solid transparent;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .card .info {
+        font-size: 12px;
+        color: #999;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .card button {
+        background-color: #111;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+    }
+
+    .card button:hover {
+        background-color: #333;
+    }
+
+    /* Cores das categorias */
+    .anestesia { border-top-color: #9b5de5; }
+    .cirurgia { border-top-color: #f15bb5; }
+    .diagnostico { border-top-color: #00bbf9; }
+    .emergencia { border-top-color: #f08a5d; }
+    .clinica { border-top-color: #55efc4; }
+    .medicina { border-top-color: #9b5de5; }
+    .neurologia { border-top-color: #ff6f91; }
+    .oftalmologia { border-top-color: #00bbf9; }
+    .oncologia { border-top-color: #9b5de5; }
+    .reproducao { border-top-color: #ff6f91; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Treino para Residência Veterinária</h1>
+        <p class="subtitle">Pratique com questões das principais especialidades veterinárias para se preparar para as provas de residência.</p>
+
+        <div class="cards">
+            <div class="card anestesia">
+                <h3>Anestesia</h3>
+                <p>Protocolos anestésicos, monitoramento e complicações em pequenos animais.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="anestesia/">Ver Questionários</button>
+            </div>
+
+            <div class="card cirurgia">
+                <h3>Cirurgia</h3>
+                <p>Técnicas cirúrgicas, instrumentação e procedimentos em medicina veterinária.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="cirurgia/">Ver Questionários</button>
+            </div>
+
+            <div class="card diagnostico">
+                <h3>Diagnóstico por Imagem</h3>
+                <p>Radiologia, ultrassonografia e outras técnicas de diagnóstico por imagem.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="diagnostico/">Ver Questionários</button>
+            </div>
+
+            <div class="card emergencia">
+                <h3>Emergência</h3>
+                <p>Atendimento de urgência e emergência em medicina veterinária.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="emergencia/">Ver Questionários</button>
+            </div>
+
+            <div class="card clinica">
+                <h3>Clínica Geral</h3>
+                <p>Medicina preventiva, consultas de rotina e cuidados básicos.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="clinica/">Ver Questionários</button>
+            </div>
+
+            <div class="card medicina">
+                <h3>Medicina Interna</h3>
+                <p>Doenças sistêmicas, endocrinologia e medicina interna avançada.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="medicina/">Ver Questionários</button>
+            </div>
+
+            <div class="card neurologia">
+                <h3>Neurologia</h3>
+                <p>Doenças neurológicas, diagnóstico e tratamento neurológico.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="neurologia/">Ver Questionários</button>
+            </div>
+
+            <div class="card oftalmologia">
+                <h3>Oftalmologia</h3>
+                <p>Doenças oculares, diagnóstico e tratamento oftalmológico.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="oftalmologia/">Ver Questionários</button>
+            </div>
+
+            <div class="card oncologia">
+                <h3>Oncologia</h3>
+                <p>Diagnóstico e tratamento de neoplasias em medicina veterinária.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="oncologia/">Ver Questionários</button>
+            </div>
+
+            <div class="card reproducao">
+                <h3>Reprodução</h3>
+                <p>Reprodução animal, obstetrícia e neonatologia veterinária.</p>
+                <div class="info">1 questionário disponível</div>
+                <button class="open-btn" data-url="reproducao/">Ver Questionários</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".open-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                window.location.href = btn.getAttribute("data-url");
+            });
+        });
+    </script>
+</body>
+</html>
