@@ -145,116 +145,117 @@ const quizId = 'q1'; // Identificador único deste quiz
 
 const quiz = [
   {
-  "q": "Qual classe de fármacos da MPA é desaconselhada em animais hipovolêmicos por agravar o quadro devido à vasodilatação periférica e consequente hipotensão?",
-  "options": [
-    "A) Fármacos anticolinérgicos.",
-    "B) Derivados da Fenotiazina (Tranquilizantes).",
-    "C) Benzodiazepínicos (Ansiolíticos).",
-    "D) Hipnoanalgésicos (Opiáceos)."
-  ],
-  "answer": "B",
-  "explanation": "Em casos de choque, a MPA deverá ser suprimida ou reduzida em até 75%, sendo as fenotiazinas especialmente preocupantes devido à sua ação de vasodilatação periférica [Massone, p. 110, 363]."
-}
-{
-  "q": "Os barbitúricos de Duração Ultracurta (15 a 30 minutos) incluem:",
-  "options": [
-    "A) Pentobarbital sódico.",
-    "B) Amobarbital.",
-    "C) Tiopental (THIONEMBUTAL), Tiamilal (SURITAL) e Metohexital (BRIETAL).",
-    "D) Propofol e Quetamina."
-  ],
-  "answer": "C",
-  "explanation": "O tiopental, o tiamilal e o metohexital são exemplos de barbitúricos de duração ultracurta [Massone, p. 58, 343]."
-}
-{
-  "q": "O que caracteriza a Anestesia Dissociativa, exemplificada pelo Cloridrato de Quetamina?",
-  "options": [
-    "A) Perda total da consciência e relaxamento muscular profundo.",
-    "B) Dissociação seletiva do córtex cerebral, causando analgesia sem perda dos reflexos protetores.",
-    "C) Depressão intensa do SNC, resultando em bradicardia e hipotensão.",
-    "D) Bloqueio neuromuscular e apnéia imediata."
-  ],
-  "answer": "B",
-  "explanation": "Anestesia dissociativa é a capacidade de dissociar o córtex cerebral, causando analgesia e “desligamento”, sem perda dos reflexos protetores [F&C, Cap. 15]."
-}
-{
-  "q": "Por que a Quetamina é indicada em pacientes chocados, como nos casos de choque hemorrágico?",
-  "options": [
-    "A) Ela causa vasodilatação periférica.",
-    "B) Ela apresenta uma ação simpatomimética e vasoconstritora.",
-    "C) Ela deprime o SNC, reduzindo o consumo metabólico.",
-    "D) Ela antagoniza os receptores GABA no corno dorsal."
-  ],
-  "answer": "B",
-  "explanation": "A quetamina apresenta ação simpatomimética, estimulando a frequência cardíaca e exercendo ação vasoconstritora periférica, elevando a pressão arterial [F&C, Cap. 15]."
-}
-{
-  "q": "Qual fármaco deve ser evitado em pacientes que devam ser submetidos à cesariana, devido à alta mortalidade fetal?",
-  "options": [
-    "A) Tiopental.",
-    "B) Pentobarbital sódico.",
-    "C) Enfluorano.",
-    "D) Quetamina."
-  ],
-  "answer": "B",
-  "explanation": "A anestesia barbitúrica é desaconselhada em cesarianas pelo pentobarbital sódico, pois a mortalidade fetal chega a 100% [Massone, p. 60, 180]."
-}
-{
-  "q": "Qual é o cuidado indispensável a ser tomado ao usar a associação anestésica de Quetamina e Xilazina em cães e gatos, devido à ação parassimpatomimética da Xilazina?",
-  "options": [
-    "A) Reduzir a dose de Quetamina.",
-    "B) Usar midazolam como antagonista.",
-    "C) Aplicar sulfato de atropina 10 a 15 minutos antes, por via subcutânea.",
-    "D) Aumentar a dose de Xilazina para potencializar o efeito."
-  ],
-  "answer": "C",
-  "explanation": "O uso prévio subcutâneo de atropina 10 a 15 minutos antes da aplicação da quetamina e xilazina é indispensável para estabilidade cardíaca, evitando efeitos colaterais [Massone, p. 94, 354]."
-}
-{
-  "q": "Qual anestésico inalatório apresenta um coeficiente de solubilidade sangue/gás de 12,1, indicando que é muito solúvel no sangue, resultando em indução e recuperação lentas?",
-  "options": [
-    "A) Halotano.",
-    "B) Isofluorano.",
-    "C) Éter dietílico.",
-    "D) Sevofluorano."
-  ],
-  "answer": "C",
-  "explanation": "O coeficiente de solubilidade sangue/gás do éter dietílico é 12,1, resultando em indução e recuperação lentas [Massone, p. 102, 352]."
-}
-{
-  "q": "Qual a dose de Quetamina recomendada por via intramuscular para felinos?",
-  "options": [
-    "A) 2 a 6 mg/kg.",
-    "B) 8 a 10 mg/kg.",
-    "C) 10 a 15 mg/kg.",
-    "D) 20 a 25 mg/kg."
-  ],
-  "answer": "C",
-  "explanation": "As doses recomendadas por via intramuscular para quetamina em felinos são de 10 a 15 mg/kg [Massone, p. 114, 366]."
-}
-{
-  "q": "Qual fármaco, quando aplicado em equinos, é citado como potencialmente causando priapismo e consequente paralisia irreversível do pênis?",
-  "options": [
-    "A) Flunitrazepam.",
-    "B) Xilazina.",
-    "C) Acepromazina.",
-    "D) Quetamina."
-  ],
-  "answer": "C",
-  "explanation": "Existem casos relatados de priapismo e paralisia irreversível do pênis após aplicação de Acepromazina em equinos [Massone, p. 22, 322]."
-}
-{
-  "q": "No que diz respeito à monitoração da profundidade anestésica, se um animal pré-tratado com atropina apresenta miose, como esse reflexo deve ser interpretado?",
-  "options": [
-    "A) A miose indica um plano cirúrgico superficial.",
-    "B) A miose indica um plano profundo (Estágio III, 3º ou 4º plano).",
-    "C) O reflexo da pupila será mascarado pela atropina e não deverá ser considerado.",
-    "D) A miose indica Estágio II (excitação)."
-  ],
-  "answer": "C",
-  "explanation": "Em animais pré-tratados com atropina, haverá midríase, mascarando o reflexo pupilar, que não deverá ser considerado [Massone, p. 49, 340]."
-}
+    "q": "Qual classe de fármacos da MPA é desaconselhada em animais hipovolêmicos por agravar o quadro devido à vasodilatação periférica e consequente hipotensão?",
+    "options": [
+      "Fármacos anticolinérgicos.",
+      "Derivados da Fenotiazina (Tranquilizantes).",
+      "Benzodiazepínicos (Ansiolíticos).",
+      "Hipnoanalgésicos (Opiáceos)."
+    ],
+    "answer": 1,
+    "explanation": "Em casos de choque, a MPA deverá ser suprimida ou reduzida em até 75%, sendo as fenotiazinas especialmente preocupantes devido à sua ação de vasodilatação periférica [Massone, p. 110, 363]."
+  },
+  {
+    "q": "Os barbitúricos de Duração Ultracurta (15 a 30 minutos) incluem:",
+    "options": [
+      "Pentobarbital sódico.",
+      "Amobarbital.",
+      "Tiopental (THIONEMBUTAL), Tiamilal (SURITAL) e Metohexital (BRIETAL).",
+      "Propofol e Quetamina."
+    ],
+    "answer": 2,
+    "explanation": "O tiopental, o tiamilal e o metohexital são exemplos de barbitúricos de duração ultracurta [Massone, p. 58, 343]."
+  },
+  {
+    "q": "O que caracteriza a Anestesia Dissociativa, exemplificada pelo Cloridrato de Quetamina?",
+    "options": [
+      "Perda total da consciência e relaxamento muscular profundo.",
+      "Dissociação seletiva do córtex cerebral, causando analgesia sem perda dos reflexos protetores.",
+      "Depressão intensa do SNC, resultando em bradicardia e hipotensão.",
+      "Bloqueio neuromuscular e apnéia imediata."
+    ],
+    "answer": 1,
+    "explanation": "Anestesia dissociativa é a capacidade de dissociar o córtex cerebral, causando analgesia e “desligamento”, sem perda dos reflexos protetores [F&C, Cap. 15]."
+  },
+  {
+    "q": "Por que a Quetamina é indicada em pacientes chocados, como nos casos de choque hemorrágico?",
+    "options": [
+      "Ela causa vasodilatação periférica.",
+      "Ela apresenta uma ação simpatomimética e vasoconstritora.",
+      "Ela deprime o SNC, reduzindo o consumo metabólico.",
+      "Ela antagoniza os receptores GABA no corno dorsal."
+    ],
+    "answer": 1,
+    "explanation": "A quetamina apresenta ação simpatomimética, estimulando a frequência cardíaca e exercendo ação vasoconstritora periférica, elevando a pressão arterial [F&C, Cap. 15]."
+  },
+  {
+    "q": "Qual fármaco deve ser evitado em pacientes que devam ser submetidos à cesariana, devido à alta mortalidade fetal?",
+    "options": [
+      "Tiopental.",
+      "Pentobarbital sódico.",
+      "Enfluorano.",
+      "Quetamina."
+    ],
+    "answer": 1,
+    "explanation": "A anestesia barbitúrica é desaconselhada em cesarianas pelo pentobarbital sódico, pois a mortalidade fetal chega a 100% [Massone, p. 60, 180]."
+  },
+  {
+    "q": "Qual é o cuidado indispensável a ser tomado ao usar a associação anestésica de Quetamina e Xilazina em cães e gatos, devido à ação parassimpatomimética da Xilazina?",
+    "options": [
+      "Reduzir a dose de Quetamina.",
+      "Usar midazolam como antagonista.",
+      "Aplicar sulfato de atropina 10 a 15 minutos antes, por via subcutânea.",
+      "Aumentar a dose de Xilazina para potencializar o efeito."
+    ],
+    "answer": 2,
+    "explanation": "O uso prévio subcutâneo de atropina 10 a 15 minutos antes da aplicação da quetamina e xilazina é indispensável para estabilidade cardíaca, evitando efeitos colaterais [Massone, p. 94, 354]."
+  },
+  {
+    "q": "Qual anestésico inalatório apresenta um coeficiente de solubilidade sangue/gás de 12,1, indicando que é muito solúvel no sangue, resultando em indução e recuperação lentas?",
+    "options": [
+      "Halotano.",
+      "Isofluorano.",
+      "Éter dietílico.",
+      "Sevofluorano."
+    ],
+    "answer": 2,
+    "explanation": "O coeficiente de solubilidade sangue/gás do éter dietílico é 12,1, resultando em indução e recuperação lentas [Massone, p. 102, 352]."
+  },
+  {
+    "q": "Qual a dose de Quetamina recomendada por via intramuscular para felinos?",
+    "options": [
+      "2 a 6 mg/kg.",
+      "8 a 10 mg/kg.",
+      "10 a 15 mg/kg.",
+      "20 a 25 mg/kg."
+    ],
+    "answer": 2,
+    "explanation": "As doses recomendadas por via intramuscular para quetamina em felinos são de 10 a 15 mg/kg [Massone, p. 114, 366]."
+  },
+  {
+    "q": "Qual fármaco, quando aplicado em equinos, é citado como potencialmente causando priapismo e consequente paralisia irreversível do pênis?",
+    "options": [
+      "Flunitrazepam.",
+      "Xilazina.",
+      "Acepromazina.",
+      "Quetamina."
+    ],
+    "answer": 2,
+    "explanation": "Existem casos relatados de priapismo e paralisia irreversível do pênis após aplicação de Acepromazina em equinos [Massone, p. 22, 322]."
+  },
+  {
+    "q": "No que diz respeito à monitoração da profundidade anestésica, se um animal pré-tratado com atropina apresenta miose, como esse reflexo deve ser interpretado?",
+    "options": [
+      "A miose indica um plano cirúrgico superficial.",
+      "A miose indica um plano profundo (Estágio III, 3º ou 4º plano).",
+      "O reflexo da pupila será mascarado pela atropina e não deverá ser considerado.",
+      "A miose indica Estágio II (excitação)."
+    ],
+    "answer": 2,
+    "explanation": "Em animais pré-tratados com atropina, haverá midríase, mascarando o reflexo pupilar, que não deverá ser considerado [Massone, p. 49, 340]."
+  }
 ];
+
 
 let currentQuestion = 0;
 let selectedOption = null;
