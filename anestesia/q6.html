@@ -144,117 +144,118 @@
 const quizId = 'q1'; // Identificador único deste quiz
 
 const quiz = [
-{
-  "q": "Qual é a principal complicação do bloqueio peridural em bovinos quando o volume de anestésico é excessivo?",
-  "options": [
-    "A) Bradicardia e hipotensão.",
-    "B) Paralisia motora total.",
-    "C) Depressão respiratória.",
-    "D) Necrose tecidual."
-  ],
-  "answer": "A",
-  "explanation": "Volume excessivo em bloqueios peridurais pode causar efeitos cardiovasculares, como bradicardia e hipotensão [Massone, p. 182, 455]."
-}
-{
-  "q": "No bloqueio do nervo infraorbital em cães, qual é o cuidado principal para evitar lesões?",
-  "options": [
-    "A) Evitar injeção muito profunda no canal.",
-    "B) Usar anestésico local de baixa concentração.",
-    "C) Sedar o animal completamente.",
-    "D) Aplicar calor local antes da injeção."
-  ],
-  "answer": "A",
-  "explanation": "A injeção profunda pode lesar o nervo infraorbital e causar insensibilidade prolongada [K&O, p. 119, 145]."
-}
-{
-  "q": "Qual reflexo deve ser monitorado em felinos durante a intubação para avaliar a anestesia?",
-  "options": [
-    "A) Reflexo laringotraqueal.",
-    "B) Reflexo pupilar.",
-    "C) Reflexo interdigital.",
-    "D) Reflexo palpebral."
-  ],
-  "answer": "A",
-  "explanation": "O reflexo laringotraqueal em felinos desaparece tardiamente, sendo crítico para avaliação do plano anestésico [Massone, p. 47, 105]."
-}
-{
-  "q": "Qual é a dose de morfina recomendada por via epidural em cães para analgesia prolongada?",
-  "options": [
-    "A) 0,01 mg/kg",
-    "B) 0,1 mg/kg",
-    "C) 1 mg/kg",
-    "D) 2 mg/kg"
-  ],
-  "answer": "B",
-  "explanation": "A morfina 0,1 mg/kg via epidural proporciona analgesia prolongada de 10 a 24 horas [K&O, Cap. 6]."
-}
-{
-  "q": "Em equinos, qual posição da cabeça facilita a intubação endotraqueal?",
-  "options": [
-    "A) Ângulo de 45°.",
-    "B) Ângulo de 130 a 150°.",
-    "C) Ângulo de 90°.",
-    "D) Posição de esfinge."
-  ],
-  "answer": "B",
-  "explanation": "O ângulo de 130 a 150° entre cabeça e pescoço facilita a passagem da sonda pela glote [Massone, p. 155, 417]."
-}
-{
-  "q": "Qual anestésico local apresenta menor toxicidade por ser um enantiômero-S puro?",
-  "options": [
-    "A) Levobupivacaína",
-    "B) Procaína",
-    "C) Ropivacaína",
-    "D) Tetracaína"
-  ],
-  "answer": "C",
-  "explanation": "A ropivacaína é um S-enantiômero puro, conferindo menor toxicidade e lipossolubilidade intermediária [K&O, p. 38, 64, 98]."
-}
-{
-  "q": "Qual é o metabólito responsável por reações alérgicas nos anestésicos do tipo éster?",
-  "options": [
-    "A) Lidocaína",
-    "B) Ácido para-aminobenzoico (PABA)",
-    "C) Tiopental",
-    "D) Ropivacaína"
-  ],
-  "answer": "B",
-  "explanation": "O PABA, subproduto dos ésteres, é responsável por reações alérgicas [K&O, Cap. 2]."
-}
-{
-  "q": "Em anestesia locorregional, a baricidade de uma solução é a relação entre a densidade do anestésico e qual líquido?",
-  "options": [
-    "A) Água destilada",
-    "B) Líquido cefalorraquidiano (LCR)",
-    "C) Sangue",
-    "D) Gordura epidural"
-  ],
-  "answer": "B",
-  "explanation": "A baricidade é a densidade do anestésico dividida pela densidade do LCR [K&O, p. 31, 63]."
-}
-{
-  "q": "Qual é o volume recomendado de solução anestésica para bloqueio subescapular do plexo braquial em cães?",
-  "options": [
-    "A) 0,1 ml/kg",
-    "B) 0,2 ml/kg",
-    "C) 0,4 ml/kg",
-    "D) 0,6 ml/kg"
-  ],
-  "answer": "C",
-  "explanation": "O volume ideal para bloqueio subescapular é 0,4 ml/kg [K&O, p. 205, 242]."
-}
-{
-  "q": "Para anestesia epidural lombossacra em cães, qual é a dose padrão de solução anestésica para ovário-histerectomia?",
-  "options": [
-    "A) 0,05 ml/kg",
-    "B) 0,10 ml/kg",
-    "C) 0,22 ml/kg",
-    "D) 0,40 ml/kg"
-  ],
-  "answer": "C",
-  "explanation": "0,22 ml/kg (1 ml para cada 4,5 kg) é a dose recomendada para bloqueios lombossacros em OVH [K&O, p. 144, 170]."
-}
+  {
+    "q": "Qual é a principal complicação do bloqueio peridural em bovinos quando o volume de anestésico é excessivo?",
+    "options": [
+      "A) Bradicardia e hipotensão.",
+      "B) Paralisia motora total.",
+      "C) Depressão respiratória.",
+      "D) Necrose tecidual."
+    ],
+    "answer": 0,
+    "explanation": "Volume excessivo em bloqueios peridurais pode causar efeitos cardiovasculares, como bradicardia e hipotensão [Massone, p. 182, 455]."
+  },
+  {
+    "q": "No bloqueio do nervo infraorbital em cães, qual é o cuidado principal para evitar lesões?",
+    "options": [
+      "A) Evitar injeção muito profunda no canal.",
+      "B) Usar anestésico local de baixa concentração.",
+      "C) Sedar o animal completamente.",
+      "D) Aplicar calor local antes da injeção."
+    ],
+    "answer": 0,
+    "explanation": "A injeção profunda pode lesar o nervo infraorbital e causar insensibilidade prolongada [K&O, p. 119, 145]."
+  },
+  {
+    "q": "Qual reflexo deve ser monitorado em felinos durante a intubação para avaliar a anestesia?",
+    "options": [
+      "A) Reflexo laringotraqueal.",
+      "B) Reflexo pupilar.",
+      "C) Reflexo interdigital.",
+      "D) Reflexo palpebral."
+    ],
+    "answer": 0,
+    "explanation": "O reflexo laringotraqueal em felinos desaparece tardiamente, sendo crítico para avaliação do plano anestésico [Massone, p. 47, 105]."
+  },
+  {
+    "q": "Qual é a dose de morfina recomendada por via epidural em cães para analgesia prolongada?",
+    "options": [
+      "A) 0,01 mg/kg",
+      "B) 0,1 mg/kg",
+      "C) 1 mg/kg",
+      "D) 2 mg/kg"
+    ],
+    "answer": 1,
+    "explanation": "A morfina 0,1 mg/kg via epidural proporciona analgesia prolongada de 10 a 24 horas [K&O, Cap. 6]."
+  },
+  {
+    "q": "Em equinos, qual posição da cabeça facilita a intubação endotraqueal?",
+    "options": [
+      "A) Ângulo de 45°.",
+      "B) Ângulo de 130 a 150°.",
+      "C) Ângulo de 90°.",
+      "D) Posição de esfinge."
+    ],
+    "answer": 1,
+    "explanation": "O ângulo de 130 a 150° entre cabeça e pescoço facilita a passagem da sonda pela glote [Massone, p. 155, 417]."
+  },
+  {
+    "q": "Qual anestésico local apresenta menor toxicidade por ser um enantiômero-S puro?",
+    "options": [
+      "A) Levobupivacaína",
+      "B) Procaína",
+      "C) Ropivacaína",
+      "D) Tetracaína"
+    ],
+    "answer": 2,
+    "explanation": "A ropivacaína é um S-enantiômero puro, conferindo menor toxicidade e lipossolubilidade intermediária [K&O, p. 38, 64, 98]."
+  },
+  {
+    "q": "Qual é o metabólito responsável por reações alérgicas nos anestésicos do tipo éster?",
+    "options": [
+      "A) Lidocaína",
+      "B) Ácido para-aminobenzoico (PABA)",
+      "C) Tiopental",
+      "D) Ropivacaína"
+    ],
+    "answer": 1,
+    "explanation": "O PABA, subproduto dos ésteres, é responsável por reações alérgicas [K&O, Cap. 2]."
+  },
+  {
+    "q": "Em anestesia locorregional, a baricidade de uma solução é a relação entre a densidade do anestésico e qual líquido?",
+    "options": [
+      "A) Água destilada",
+      "B) Líquido cefalorraquidiano (LCR)",
+      "C) Sangue",
+      "D) Gordura epidural"
+    ],
+    "answer": 1,
+    "explanation": "A baricidade é a densidade do anestésico dividida pela densidade do LCR [K&O, p. 31, 63]."
+  },
+  {
+    "q": "Qual é o volume recomendado de solução anestésica para bloqueio subescapular do plexo braquial em cães?",
+    "options": [
+      "A) 0,1 ml/kg",
+      "B) 0,2 ml/kg",
+      "C) 0,4 ml/kg",
+      "D) 0,6 ml/kg"
+    ],
+    "answer": 2,
+    "explanation": "O volume ideal para bloqueio subescapular é 0,4 ml/kg [K&O, p. 205, 242]."
+  },
+  {
+    "q": "Para anestesia epidural lombossacra em cães, qual é a dose padrão de solução anestésica para ovário-histerectomia?",
+    "options": [
+      "A) 0,05 ml/kg",
+      "B) 0,10 ml/kg",
+      "C) 0,22 ml/kg",
+      "D) 0,40 ml/kg"
+    ],
+    "answer": 2,
+    "explanation": "0,22 ml/kg (1 ml para cada 4,5 kg) é a dose recomendada para bloqueios lombossacros em OVH [K&O, p. 144, 170]."
+  }
 ];
+
 
 let currentQuestion = 0;
 let selectedOption = null;
