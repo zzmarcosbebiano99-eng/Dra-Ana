@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergência</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #1f2937;
+      padding: 40px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1f2937;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #f08a5d;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #20B2AA;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #f08a5d;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .card-info {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .card-info span {
+      font-size: 12px;
+      color: #16a34a; /* verde para pontuação */
+      font-weight: bold;
+    }
+
+    .card button {
+      padding: 8px 16px;
+      background-color: #0f172a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 8px;
+      width: fit-content;
+    }
+
+    .card button:hover {
+      background-color: #1e293b;
+    }
+
+  </style>
+</head>
+<body>
+
+  <a href="../">← Voltar às Áreas</a>
+  <h1>Emergência</h1>
+  <p class="subtitle">Atendimento de urgência e emergência em medicina veterinária.</p>
+
+  <div class="cards">
+    <!-- 10 questionários como exemplo -->
+    <div class="card" data-quiz="E1">
+      <div class="card-title">📄 Questionário 1</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E1.html'">Iniciar</button>
+    </div>
+
+    <div class="card" data-quiz="E2">
+      <div class="card-title">📄 Questionário 2</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E2.html'">Iniciar</button>
+    </div>
+    
+    <div class="card" data-quiz="E3">
+      <div class="card-title">📄 Questionário 3</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E3.html'">Iniciar</button>
+    </div>
+
+     <div class="card" data-quiz="E4">
+      <div class="card-title">📄 Questionário 4</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E4.html'">Iniciar</button>
+    </div>
+
+     <div class="card" data-quiz="E5">
+      <div class="card-title">📄 Questionário 5</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E5.html'">Iniciar</button>
+    </div>
+
+     <div class="card" data-quiz="E6">
+      <div class="card-title">📄 Questionário 6</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E6.html'">Iniciar</button>
+    </div>
+
+     <div class="card" data-quiz="E7">
+      <div class="card-title">📄 Questionário 7</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E7.html'">Iniciar</button>
+    </div>
+
+     <div class="card" data-quiz="E8">
+      <div class="card-title">📄 Questionário 8</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E8.html'">Iniciar</button>
+    </div>
+
+    <div class="card" data-quiz="E9">
+      <div class="card-title">📄 Questionário 9</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E9.html'">Iniciar</button>
+    </div>
+
+    <div class="card" data-quiz="E10">
+      <div class="card-title">📄 Questionário 10</div>
+      <div class="card-desc">10 questões</div>
+      <div class="card-info">
+        <span class="score">Ainda não realizado</span>
+      </div>
+      <button onclick="window.location.href='E10.html'">Iniciar</button>
+    </div>
+    <!-- repete a mesma estrutura para os demais questionários -->
+  </div>
+
+  <script>
+    // Mostrar a última pontuação salva no LocalStorage
+    document.querySelectorAll(".card").forEach(card => {
+      const quizId = card.getAttribute("data-quiz");
+      const lastScore = localStorage.getItem("score_" + quizId);
+      const scoreEl = card.querySelector(".score");
+
+      if (lastScore !== null) {
+        scoreEl.textContent = "Última pontuação: " + lastScore + "%";
+      }
+    });
+  </script>
+</body>
+</html>
