@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anestesia</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #1f2937;
+      padding: 40px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1f2937;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #8b5cf6; /* Roxo */
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #6b7280; /* Cinza suave */
+      margin-bottom: 40px;
+    }
+
+    /* Cards container */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card */
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: #8b5cf6;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+
+    /* Hover igual à home */
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .card-info span {
+      font-size: 12px;
+      color: #8b5cf6;
+      cursor: default;
+    }
+
+    .card button {
+      padding: 8px 16px;
+      background-color: #0f172a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .card button:hover {
+      background-color: #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="../">← Voltar às Áreas</a>
+  <h1>Anestesia</h1>
+  <p class="subtitle">Protocolos anestésicos, monitoramento e complicações em pequenos animais.</p>
+
+  <div class="cards">
+    <!-- 10 questionários como exemplo -->
+    <div class="card">
+      <div class="card-title">📄 Questionário 1</div>
+      <div class="card-desc">Princípios fundamentais da anestesia</div>
+      <div class="card-info">
+        <span>10 questões</span>
+        <span>Fácil</span>
+        <button onclick="window.location.href='q1.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 2</div>
+      <div class="card-desc">Monitoramento anestésico</div>
+      <div class="card-info">
+        <span>12 questões</span>
+        <span>Médio</span>
+        <button onclick="window.location.href='q2.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 3</div>
+      <div class="card-desc">Complicações comuns em anestesia</div>
+      <div class="card-info">
+        <span>8 questões</span>
+        <span>Difícil</span>
+        <button onclick="window.location.href='q3.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 4</div>
+      <div class="card-desc">Fármacos anestésicos</div>
+      <div class="card-info">
+        <span>15 questões</span>
+        <span>Médio</span>
+        <button onclick="window.location.href='q4.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 5</div>
+      <div class="card-desc">Protocolos anestésicos em cães</div>
+      <div class="card-info">
+        <span>9 questões</span>
+        <span>Fácil</span>
+        <button onclick="window.location.href='q5.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 6</div>
+      <div class="card-desc">Protocolos anestésicos em gatos</div>
+      <div class="card-info">
+        <span>11 questões</span>
+        <span>Médio</span>
+        <button onclick="window.location.href='q6.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 7</div>
+      <div class="card-desc">Anestesia inalatória</div>
+      <div class="card-info">
+        <span>7 questões</span>
+        <span>Médio</span>
+        <button onclick="window.location.href='q7.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 8</div>
+      <div class="card-desc">Anestesia intravenosa</div>
+      <div class="card-info">
+        <span>13 questões</span>
+        <span>Difícil</span>
+        <button onclick="window.location.href='q8.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 9</div>
+      <div class="card-desc">Analgesia multimodal</div>
+      <div class="card-info">
+        <span>10 questões</span>
+        <span>Médio</span>
+        <button onclick="window.location.href='q9.html'">Iniciar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📄 Questionário 10</div>
+      <div class="card-desc">Recuperação anestésica</div>
+      <div class="card-info">
+        <span>6 questões</span>
+        <span>Fácil</span>
+        <button onclick="window.location.href='q10.html'">Iniciar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
