@@ -117,7 +117,7 @@
   <div class="quiz-container" role="application" aria-label="Questionário de Anestesia">
     <div class="quiz-header">
       <h1></h1>
-      <p>Cirurgia Articular e Luxações</p>
+      <p>Fixação Interna e Externa (Detalhes Biomecânicos)</p>
     </div>
 
     <div class="question" id="questionText"></div>
@@ -145,114 +145,114 @@ const quizId = 'q6'; // Identificador único deste quiz
 
 const quiz = [
   {
-    "q": "Qual é a principal fonte de células epiteliais para a reepitelização em feridas de espessura parcial (partial-thickness) em cães e gatos?",
+    "q": "Qual é a tolerância máxima à deformação (strain) que o tecido ósseo maduro pode suportar na área de uma fratura para que ocorra a cicatrização direta haversiana (direct haversian bridging)?",
     "options": [
-      "A) A derme superficial.",
-      "B) O plexo subdérmico.",
-      "C) A bainha da raiz externa dos folículos pilosos compostos.",
-      "D) As células basais da glândula sudorípara apócrina."
+      "A) 100%",
+      "B) 15%",
+      "C) 2%",
+      "D) 0.5 grau (flexão)"
     ],
     "answer": 2,
-    "explanation": "A migração de células epiteliais, essencial para a reepitelização, origina-se primariamente da bainha da raiz externa de cada folículo piloso."
+    "explanation": "A cicatrização óssea direta exige que a deformação interfragmentar não exceda 2%."
   },
   {
-    "q": "Na classificação de feridas cirúrgicas, uma ferida Limpa-Contaminada pode ser definida como uma ferida operativa em que ocorreu qual evento?",
+    "q": "Parafusos de rosca de perfil positivo (positive-thread-profile pins) são inseridos em um orifício piloto que deve ter qual dimensão em relação ao diâmetro do pino, para reduzir microfraturas corticais?",
     "options": [
-      "A) Contaminação por pus ou corpos estranhos.",
-      "B) Entrada no trato respiratório, alimentar ou geniturinário sem contaminação incomum.",
-      "C) Presença de tecido desvitalizado antes da incisão.",
-      "D) Ferida não traumática realizada sob condições assépticas."
+      "A) 10% maior que o diâmetro do pino.",
+      "B) 10% menor que o diâmetro do pino.",
+      "C) Exatamente o diâmetro do núcleo da rosca.",
+      "D) Exatamente o diâmetro da rosca externa."
     ],
     "answer": 1,
-    "explanation": "Feridas Limpa-Contaminadas são feridas operativas nas quais os tratos respiratório, alimentar ou geniturinário são penetrados sem contaminação incomum."
+    "explanation": "O orifício piloto para pinos de perfil positivo deve ser 10% menor que o diâmetro do pino para prevenir microfraturas corticais."
   },
   {
-    "q": "Em gatos, a formação do tecido de granulação é notoriamente diferente dos cães. Qual é uma característica deste processo em felinos, conforme relatado?",
+    "q": "Qual é a principal limitação de rigidez (stiffness) de um fixador esquelético externo unilateral (Tipo I) de barra única?",
     "options": [
-      "A) O tecido de granulação aparece mais rápido (7,5 dias).",
-      "B) O tecido de granulação se desenvolve ao longo da borda da ferida, avançando de forma centrípeta.",
-      "C) A força tênsil das incisões felinas é maior (aproximadamente 50%) do que em cães.",
-      "D) O tecido de granulação se origina de todo o leito da ferida."
+      "A) O número de pinos de fixação por fragmento.",
+      "B) O tipo de pino (roscado ou liso).",
+      "C) A rigidez da barra de conexão (connecting bar).",
+      "D) A colocação dos pinos no centro do osso."
+    ],
+    "answer": 2,
+    "explanation": "A rigidez da barra de conexão é o fator limitante nos fixadores externos unilaterais Tipo I."
+  },
+  {
+    "q": "Na técnica de parafuso de sustentação (lag screw), se o orifício em ambos os córtices (próximo e distante) for rosqueado (tapped), qual será o resultado biomecânico?",
+    "options": [
+      "A) Máxima compressão interfragmentar.",
+      "B) Nenhuma compressão será gerada.",
+      "C) Apenas forças de cisalhamento serão neutralizadas.",
+      "D) O parafuso travará imediatamente, impedindo a inserção."
     ],
     "answer": 1,
-    "explanation": "Em gatos, a formação do tecido de granulação é mais lenta e progride do bordo para o centro (centrípeta), ao contrário dos cães, onde se origina de todo o leito."
+    "explanation": "Rosquear ambos os córtices para um parafuso de sustentação impede o deslizamento e, consequentemente, a compressão interfragmentar."
   },
   {
-    "q": "Qual é o risco primário do uso de suturas em \"X\" ou \"Y\" (em que duas incisões se cruzam) no fechamento de feridas?",
+    "q": "Qual é o tempo ideal após a aplicação de um fixador esquelético externo (FEE) rígido em cães para iniciar a dinamização e acelerar a cicatrização indireta?",
     "options": [
-      "A) Formação excessiva de tecido de granulação.",
-      "B) Necrose terminal das pontas do retalho.",
-      "C) Maior probabilidade de deiscência da incisão.",
-      "D) Formação de seroma."
-    ],
-    "answer": 2,
-    "explanation": "A deiscência da ferida é mais provável de ocorrer quando duas incisões se cruzam (fechamentos em X ou Y)."
-  },
-  {
-    "q": "Qual é o papel de um estenoso (stent) em cirurgia reconstrutiva veterinária, conforme a definição da fonte?",
-    "options": [
-      "A) Prevenir a neovascularização.",
-      "B) Exclusivamente para imobilizar fraturas articulares.",
-      "C) Material usado para manter o tecido no lugar, controlar o espaço morto ou fornecer suporte.",
-      "D) Um tipo de curativo de hidrogel avançado."
-    ],
-    "answer": 2,
-    "explanation": "Um estenoso (stent) é qualquer material usado para manter o tecido no lugar, controlar o espaço morto ou fornecer suporte a uma ferida após o fechamento."
-  },
-  {
-    "q": "Em cães com feridas cortantes (shearing wounds) nas extremidades inferiores, o que é comumente afetado além da pele e do músculo, necessitando estabilização?",
-    "options": [
-      "A) Somente as falanges terminais.",
-      "B) O suprimento sanguíneo arterial distal.",
-      "C) Os ossos metatarsais e a cápsula da articulação do carpo/tarso.",
-      "D) O ligamento cruzado cranial."
-    ],
-    "answer": 2,
-    "explanation": "Feridas cortantes nas extremidades inferiores resultam em perda de pele, músculo, osso e suporte ligamentar da articulação envolvida (carpal ou tarsal)."
-  },
-  {
-    "q": "O que a \"falácia da razão Comprimento/Largura\" (Length to Width Ratio) demonstrou em relação aos retalhos pediculados baseados no plexo subdérmico em cães?",
-    "options": [
-      "A) Retalhos mais longos sempre sobrevivem melhor.",
-      "B) Retalhos com o mesmo comprimento, mas larguras diferentes, tiveram a mesma área de sobrevivência.",
-      "C) A proporção ideal é 4:1.",
-      "D) A neovascularização da base é mais importante do que o plexo subdérmico."
+      "A) 2 semanas.",
+      "B) 6 semanas.",
+      "C) 10 semanas.",
+      "D) 3 meses."
     ],
     "answer": 1,
-    "explanation": "Retalhos do mesmo comprimento, mas com larguras variáveis, tiveram essencialmente a mesma área de sobrevivência, refutando a ideia de que alargar o retalho melhora a sobrevivência."
+    "explanation": "A dinamização do FEE é idealmente iniciada cerca de 6 semanas após a aplicação para acelerar a cicatrização indireta."
   },
   {
-    "q": "Qual é a principal desvantagem dos retalhos diretos distantes (distant direct flaps), como o retalho de dobra (hinge) ou bolsa (pouch), para fechamento de feridas nas extremidades?",
+    "q": "No uso do arame de banda de tensão (Tension Band) no olécrano, como o arame de aço inoxidável é moldado para garantir o braço de alavanca mais longo possível?",
     "options": [
-      "A) A alta taxa de necrose terminal devido ao suprimento sanguíneo deficiente.",
-      "B) A exigência de imobilização prolongada do membro afetado contra o tronco.",
-      "C) A necessidade de microcirurgia vascular.",
-      "D) A dificuldade de controle de infecção no leito do receptor."
+      "A) Em forma de laço simples.",
+      "B) Em forma de figura de 8 (figure-of-8).",
+      "C) Em forma de \"U\" invertido.",
+      "D) Enrolado em torno dos pinos de Kirschner."
     ],
     "answer": 1,
-    "explanation": "Retalhos diretos distantes exigem imobilização prolongada do membro contra o tronco, o que é um desafio no manejo."
+    "explanation": "O arame de banda de tensão é moldado em figura de 8 para maximizar o braço de alavanca e garantir compressão eficaz."
   },
   {
-    "q": "Para o manejo de um higroma de cotovelo, qual a principal vantagem do uso de drenos a vácuo (vacuum drains) em comparação com drenos de Penrose e bandagens compressivas?",
+    "q": "Para placas em ponte (bridging plates) em fraturas com grande cominuição, qual é o número mínimo de córtices que devem ser engajados pelos parafusos nas metáfises proximal e distal?",
     "options": [
-      "A) Necessita de bandagens e trocas múltiplas.",
-      "B) A drenagem é estagiada e menos eficaz.",
-      "C) Pode evitar bandagens e trocas múltiplas, e o volume do exsudato pode ser quantificado.",
-      "D) Deve ser removido em 7 dias devido ao risco de infecção."
+      "A) Dois córtices em cada extremidade.",
+      "B) Pelo menos seis a oito córtices em cada segmento.",
+      "C) O máximo de parafusos possível em todas as lacunas.",
+      "D) Apenas dois córtices, utilizando parafusos de travamento."
     ],
-    "answer": 2,
-    "explanation": "O dreno a vácuo sifona continuamente o fluido do higroma, minimiza o pós-operatório, evita múltiplas bandagens e permite a quantificação do exsudato."
+    "answer": 1,
+    "explanation": "Placas em ponte exigem o engajamento de 6 a 8 córtices em cada segmento para garantir estabilidade e restauração do comprimento ósseo."
   },
   {
-    "q": "Qual é a profundidade de queimadura que envolve a espessura total da pele e é classificada como terceiro grau?",
+    "q": "Pinos de perfil de rosca negativo (negative-thread-profile pins) são biomecanicamente mais fracos em qual região, tornando-os suscetíveis à falha por fadiga devido à flexão repetitiva?",
     "options": [
-      "A) Limitada à epiderme (primeiro grau).",
-      "B) Epiderme e uma porção variável da derme (segundo grau).",
-      "C) Envolvimento completo de toda a espessura da pele.",
-      "D) Extensão para tecidos mais profundos subjacentes (quarto grau)."
+      "A) No ponto de entrada no córtex proximal.",
+      "B) No ponto de saída no córtex distal.",
+      "C) Na junção da porção rosqueada e não rosqueada.",
+      "D) No centro da diáfise óssea."
     ],
     "answer": 2,
-    "explanation": "Queimaduras de terceiro grau são classificadas como envolvimento completo de toda a espessura da pele."
+    "explanation": "Pinos de perfil negativo são mais fracos na junção das porções rosqueadas e não rosqueadas, área suscetível à falha por fadiga."
+  },
+  {
+    "q": "Ao usar um parafuso de sustentação (lag screw) em fraturas com múltiplas linhas de fratura, a que distância mínima do local da fratura o centro do orifício deve ser perfurado?",
+    "options": [
+      "A) Pelo menos 1.5 vezes o diâmetro do parafuso.",
+      "B) Pelo menos 2 vezes o diâmetro do parafuso.",
+      "C) Exatamente o diâmetro do parafuso.",
+      "D) 5 mm de distância."
+    ],
+    "answer": 0,
+    "explanation": "O centro do orifício do parafuso lag deve estar a pelo menos 1.5 vezes o diâmetro do parafuso da linha de fratura."
+  },
+  {
+    "q": "Qual é a recomendação para o diâmetro de arame de cerclagem (cerclage wire) a ser usado em raças toy e gatos?",
+    "options": [
+      "A) 18 gauge (1.0 mm).",
+      "B) 20 gauge (0.81 mm).",
+      "C) 22 gauge (0.64 mm).",
+      "D) 16 gauge (1.25 mm)."
+    ],
+    "answer": 2,
+    "explanation": "Para raças toy e gatos, o arame de cerclagem recomendado é 22 gauge (0.64 mm) para garantir resistência adequada sem excessivo volume de material."
   }
 ];
 
