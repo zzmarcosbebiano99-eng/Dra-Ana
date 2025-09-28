@@ -144,106 +144,107 @@
 const quizId = 'q1'; // Identificador único deste quiz
 
 const quiz = [
- {
-  "q": "Qual evento é considerado um marco na difusão da Anestesiologia Veterinária no Brasil?",
-  "options": [
-    "A) A criação da primeira disciplina de Anestesiologia Veterinária na Unesp em 1973.",
-    "B) O lançamento da 1ª edição da obra Anestesia em Cães e Gatos em 2002.",
-    "C) O reconhecimento do CBCAV pelo CFMV em 1994.",
-    "D) A primeira demonstração de anestesia em equinos no London Veterinary College."
-  ],
-  "answer": "B",
-  "explanation": "Um fato muito importante na história da Anestesiologia Veterinária no Brasil foi o lançamento da 1ª edição de Anestesia em Cães e Gatos, em 2002, que foi a primeira obra nacional a abordar exclusivamente a anestesia em cães e gatos, tornando-se uma referência fundamental [F&C, p. 8]."
-}
-{
-  "q": "Qual lei dos gases estabelece que o volume de uma determinada massa de gás varia inversamente à sua pressão absoluta, sob condições de temperatura constante?",
-  "options": [
-    "A) Lei de Charles.",
-    "B) Lei de Gay-Lussac.",
-    "C) Lei de Dalton.",
-    "D) Lei de Boyle."
-  ],
-  "answer": "D",
-  "explanation": "A Lei de Boyle ou 1ª Lei dos Gases Perfeitos estabelece que o volume de uma determinada massa de gás varia inversamente à sua pressão absoluta, sob condições de temperatura constante [F&C, p. 14]."
-}
-{
-  "q": "Na fisiologia do sistema nervoso periférico, qual íon, ao entrar na célula nervosa, provoca a fase de despolarização do potencial de ação?",
-  "options": [
-    "A) Potássio ($K^{+}$).",
-    "B) Cloreto ($Cl^{-}$).",
-    "C) Sódio ($Na^{+}$).",
-    "D) Cálcio ($Ca^{2+}$)."
-  ],
-  "answer": "C",
-  "explanation": "A forma ionizada dos anestésicos locais atua bloqueando o canal de sódio, impedindo a despolarização. O influxo de $Na^{+}$ na célula é o mecanismo essencial da despolarização [K&O, Cap. 1, p. 25, 61]."
-}
-{
-  "q": "Onde são abordados, na estrutura do livro Anestesia em Cães e Gatos, a fluidoterapia, a hemoterapia e a correção de distúrbios eletrolíticos?",
-  "options": [
-    "A) Seção 1: Fundamentos da Anestesia.",
-    "B) Seção 2: Preparo e Monitoração.",
-    "C) Seção 3: Fluidos, Equilíbrio Ácido-Básico e Eletrólitos.",
-    "D) Seção 7: Complicações e Cuidados Pós-operatórios."
-  ],
-  "answer": "C",
-  "explanation": "Aspectos inerentes aos cuidados com o paciente no período transoperatório, como fluidoterapia, hemoterapia e correção de distúrbios eletrolíticos, são tratados criteriosamente na Seção 3 [F&C, p. 5, 129]."
-}
-{
-  "q": "A dor proveniente das vísceras (dor visceral) é classicamente descrita como:",
-  "options": [
-    "A) Latejamento.",
-    "B) Formigamento.",
-    "C) Cólica ou cãibra.",
-    "D) Queimação."
-  ],
-  "answer": "C",
-  "explanation": "Dor visceral é a dor, proveniente das vísceras, descrita como cãibra ou como cólica [K&O, p. 14]."
-}
-{
-  "q": "A dor crônica (neuropática ou patológica) é definida como a dor que persiste por longos períodos. Qual dos seguintes mecanismos está relacionado à sua ocorrência?",
-  "options": [
-    "A) Sensibilização de fibras nociceptivas aferentes primárias.",
-    "B) Perda de consciência.",
-    "C) Exclusivamente dor somática.",
-    "D) Reconhecimento imediato do estímulo no córtex cerebral."
-  ],
-  "answer": "A",
-  "explanation": "A dor crônica ocorre por causas como a sensibilização de fibras nociceptivas aferentes primárias e perda da inibição central no corno dorsal [F&C, Seção 6]."
-}
-{
-  "q": "Em 1847, a utilização da anestesia em animais nos Estados Unidos tinha poucos defensores. Qual o motivo apontado pelos autores?",
-  "options": [
-    "A) A toxicidade do éter era muito alta.",
-    "B) Os experimentos em equinos falharam.",
-    "C) O pequeno número de médicos veterinários graduados no país (15 ao todo).",
-    "D) A falta de equipamentos inalatórios."
-  ],
-  "answer": "C",
-  "explanation": "Considerando o pequeno número de médicos veterinários graduados naquele país em meados do século XIX (15 ao todo em 1847), não é de se surpreender que a anestesia em animais tivesse poucos defensores [F&C, p. 6]."
-}
-{
-  "q": "Qual reflexo em felinos desaparece tardiamente em comparação com outras espécies animais, dificultando a intubação orotraqueal?",
-  "options": [
-    "A) Reflexo pupilar.",
-    "B) Reflexo laringotraqueal.",
-    "C) Reflexo palpebral.",
-    "D) Reflexo interdigital."
-  ],
-  "answer": "B",
-  "explanation": "Em felinos, o reflexo laringotraqueal desaparece tardiamente, em comparação com as outras espécies animais, o que dificulta a intubação orotraqueal [Massone, p. 47, 105, 334, 359]."
-}
-{
-  "q": "Qual é a principal finalidade da Medicação Pré-Anestésica (MPA)?",
-  "options": [
-    "A) Bloquear exclusivamente o sistema nervoso central (SNC).",
-    "B) Preparar o animal para o sono artificial, promovendo sedação e suprimindo irritabilidade e reações indesejáveis.",
-    "C) Aumentar o risco de excitação pela anestesia barbitúrica.",
-    "D) Promover midríase acentuada para monitoração."
-  ],
-  "answer": "B",
-  "explanation": "A MPA é o ato que antecede a anestesia, preparando o animal para o sono artificial, dando-lhe a devida Sedação, suprimindo-lhe a irritabilidade, a agressividade e as reações indesejáveis causadas pelos anestésicos [Massone, p. 19]."
-}
+  {
+    "q": "Qual evento é considerado um marco na difusão da Anestesiologia Veterinária no Brasil?",
+    "options": [
+      "A) A criação da primeira disciplina de Anestesiologia Veterinária na Unesp em 1973.",
+      "B) O lançamento da 1ª edição da obra Anestesia em Cães e Gatos em 2002.",
+      "C) O reconhecimento do CBCAV pelo CFMV em 1994.",
+      "D) A primeira demonstração de anestesia em equinos no London Veterinary College."
+    ],
+    "answer": 1,
+    "explanation": "Um fato muito importante na história da Anestesiologia Veterinária no Brasil foi o lançamento da 1ª edição de Anestesia em Cães e Gatos, em 2002, que foi a primeira obra nacional a abordar exclusivamente a anestesia em cães e gatos, tornando-se uma referência fundamental [F&C, p. 8]."
+  },
+  {
+    "q": "Qual lei dos gases estabelece que o volume de uma determinada massa de gás varia inversamente à sua pressão absoluta, sob condições de temperatura constante?",
+    "options": [
+      "A) Lei de Charles.",
+      "B) Lei de Gay-Lussac.",
+      "C) Lei de Dalton.",
+      "D) Lei de Boyle."
+    ],
+    "answer": 3,
+    "explanation": "A Lei de Boyle ou 1ª Lei dos Gases Perfeitos estabelece que o volume de uma determinada massa de gás varia inversamente à sua pressão absoluta, sob condições de temperatura constante [F&C, p. 14]."
+  },
+  {
+    "q": "Na fisiologia do sistema nervoso periférico, qual íon, ao entrar na célula nervosa, provoca a fase de despolarização do potencial de ação?",
+    "options": [
+      "A) Potássio ($K^{+}$).",
+      "B) Cloreto ($Cl^{-}$).",
+      "C) Sódio ($Na^{+}$).",
+      "D) Cálcio ($Ca^{2+}$)."
+    ],
+    "answer": 2,
+    "explanation": "A forma ionizada dos anestésicos locais atua bloqueando o canal de sódio, impedindo a despolarização. O influxo de $Na^{+}$ na célula é o mecanismo essencial da despolarização [K&O, Cap. 1, p. 25, 61]."
+  },
+  {
+    "q": "Onde são abordados, na estrutura do livro Anestesia em Cães e Gatos, a fluidoterapia, a hemoterapia e a correção de distúrbios eletrolíticos?",
+    "options": [
+      "A) Seção 1: Fundamentos da Anestesia.",
+      "B) Seção 2: Preparo e Monitoração.",
+      "C) Seção 3: Fluidos, Equilíbrio Ácido-Básico e Eletrólitos.",
+      "D) Seção 7: Complicações e Cuidados Pós-operatórios."
+    ],
+    "answer": 2,
+    "explanation": "Aspectos inerentes aos cuidados com o paciente no período transoperatório, como fluidoterapia, hemoterapia e correção de distúrbios eletrolíticos, são tratados criteriosamente na Seção 3 [F&C, p. 5, 129]."
+  },
+  {
+    "q": "A dor proveniente das vísceras (dor visceral) é classicamente descrita como:",
+    "options": [
+      "A) Latejamento.",
+      "B) Formigamento.",
+      "C) Cólica ou cãibra.",
+      "D) Queimação."
+    ],
+    "answer": 2,
+    "explanation": "Dor visceral é a dor, proveniente das vísceras, descrita como cãibra ou como cólica [K&O, p. 14]."
+  },
+  {
+    "q": "A dor crônica (neuropática ou patológica) é definida como a dor que persiste por longos períodos. Qual dos seguintes mecanismos está relacionado à sua ocorrência?",
+    "options": [
+      "A) Sensibilização de fibras nociceptivas aferentes primárias.",
+      "B) Perda de consciência.",
+      "C) Exclusivamente dor somática.",
+      "D) Reconhecimento imediato do estímulo no córtex cerebral."
+    ],
+    "answer": 0,
+    "explanation": "A dor crônica ocorre por causas como a sensibilização de fibras nociceptivas aferentes primárias e perda da inibição central no corno dorsal [F&C, Seção 6]."
+  },
+  {
+    "q": "Em 1847, a utilização da anestesia em animais nos Estados Unidos tinha poucos defensores. Qual o motivo apontado pelos autores?",
+    "options": [
+      "A) A toxicidade do éter era muito alta.",
+      "B) Os experimentos em equinos falharam.",
+      "C) O pequeno número de médicos veterinários graduados no país (15 ao todo).",
+      "D) A falta de equipamentos inalatórios."
+    ],
+    "answer": 2,
+    "explanation": "Considerando o pequeno número de médicos veterinários graduados naquele país em meados do século XIX (15 ao todo em 1847), não é de se surpreender que a anestesia em animais tivesse poucos defensores [F&C, p. 6]."
+  },
+  {
+    "q": "Qual reflexo em felinos desaparece tardiamente em comparação com outras espécies animais, dificultando a intubação orotraqueal?",
+    "options": [
+      "A) Reflexo pupilar.",
+      "B) Reflexo laringotraqueal.",
+      "C) Reflexo palpebral.",
+      "D) Reflexo interdigital."
+    ],
+    "answer": 1,
+    "explanation": "Em felinos, o reflexo laringotraqueal desaparece tardiamente, em comparação com as outras espécies animais, o que dificulta a intubação orotraqueal [Massone, p. 47, 105, 334, 359]."
+  },
+  {
+    "q": "Qual é a principal finalidade da Medicação Pré-Anestésica (MPA)?",
+    "options": [
+      "A) Bloquear exclusivamente o sistema nervoso central (SNC).",
+      "B) Preparar o animal para o sono artificial, promovendo sedação e suprimindo irritabilidade e reações indesejáveis.",
+      "C) Aumentar o risco de excitação pela anestesia barbitúrica.",
+      "D) Promover midríase acentuada para monitoração."
+    ],
+    "answer": 1,
+    "explanation": "A MPA é o ato que antecede a anestesia, preparando o animal para o sono artificial, dando-lhe a devida Sedação, suprimindo-lhe a irritabilidade, a agressividade e as reações indesejáveis causadas pelos anestésicos [Massone, p. 19]."
+  }
 ];
+
 
 let currentQuestion = 0;
 let selectedOption = null;
