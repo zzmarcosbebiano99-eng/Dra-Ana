@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionário de Anestesia</title>
+<style>
+  :root{
+    --bg:#f5f6fa;
+    --card:#ffffff;
+    --muted:#777;
+    --accent:#007bff;
+    --green:#28a745;
+    --red:#dc3545;
+    --green-bg:#d4edda;
+    --red-bg:#f8d7da;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    padding: 50px 16px;
+  }
+
+  .quiz-container {
+    width: 680px;
+    max-width: 95%;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15,20,30,0.06);
+    padding: 30px;
+  }
+
+  .quiz-header { margin-bottom: 18px; }
+  .quiz-header h1 { font-size: 22px; margin-bottom: 4px; }
+  .quiz-header p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .question { margin: 18px 0; font-weight: 600; font-size: 18px; }
+  .options { list-style: none; padding: 0; margin: 0; }
+
+  .option {
+    background: #fbfcfd;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(15,20,30,0.04);
+  }
+
+  .option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(15,20,30,0.04);
+    background: #f4f7fb;
+  }
+
+  .option.selected {
+    background: linear-gradient(180deg,#eef5ff, #f6fbff);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.08) inset;
+    outline: none;
+  }
+
+  .option.correct {
+    background: linear-gradient(180deg, #eef9f0, #f7fcf8);
+    border-left: 6px solid var(--green);
+    border-color: rgba(40,167,69,0.14);
+  }
+
+  .option.incorrect {
+    background: linear-gradient(180deg, #fff5f6, #fff8f9);
+    border-left: 6px solid var(--red);
+    border-color: rgba(220,53,69,0.08);
+    opacity: 0.98;
+  }
+
+  .feedback {
+    margin-top: 16px;
+    font-size: 15px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    box-shadow: 0 6px 18px rgba(15,20,30,0.03);
+  }
+
+  .feedback .icon { font-size: 20px; margin-top: 2px; }
+  .feedback.correct { background: var(--green-bg); color: #155724; border-left: 6px solid var(--green); }
+  .feedback.incorrect { background: var(--red-bg); color: #721c24; border-left: 6px solid var(--red); }
+
+  .explanation { margin-top: 10px; font-size: 14px; color: #222; line-height: 1.4; background: rgba(0,0,0,0.01); padding: 10px; border-radius: 8px; }
+
+  .btn-row { display:flex; gap:12px; margin-top: 18px; align-items:center; }
+  .btn { padding: 11px 20px; border: none; border-radius: 9px; background-color: var(--accent); color: white; cursor: pointer; font-size: 15px; transition: background .12s ease, transform .08s; }
+  .btn:hover { transform: translateY(-2px); background-color: #0056b3; }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-secondary { background: #6c757d; }
+  .btn-back { background: #000; color: #fff; }
+
+  .gabarito { margin-top: 20px; }
+  .gabarito h2 { margin: 0 0 12px 0; font-size: 20px; }
+  .g-item { border-radius: 10px; padding: 12px; margin-bottom: 12px; background: #fbfcfd; border: 1px solid rgba(15,20,30,0.04); }
+  .g-item .meta { font-size: 14px; margin-bottom: 8px; }
+  .g-item .meta .you { font-weight: 600; }
+  .answer-correct { color: var(--green); font-weight:700; }
+  .answer-wrong { color: var(--red); font-weight:700; }
+
+  @media (max-width:480px){ .quiz-container { padding: 18px; } .question { font-size:16px; } }
+</style>
+</head>
+<body>
+  <div class="quiz-container" role="application" aria-label="Questionário de Anestesia">
+    <div class="quiz-header">
+      <h1>Anestesia Básica</h1>
+      <p>Questionário — 10 questões</p>
+    </div>
+
+    <div class="question" id="questionText"></div>
+    <ul class="options" id="optionsList" aria-live="polite"></ul>
+
+    <div class="feedback" id="feedbackBox" role="status" aria-hidden="true">
+      <div class="icon" id="feedbackIcon">✔️</div>
+      <div>
+        <div id="feedbackTitle" style="font-weight:700"></div>
+        <div class="explanation" id="feedbackExplanation"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-confirm" id="btnConfirm">Confirmar Resposta</button>
+      <button class="btn btn-next" id="btnNext" style="display:none;">Próxima Questão</button>
+      <button class="btn btn-secondary" id="btnRestart" style="display:none;">Refazer</button>
+    </div>
+
+    <div class="gabarito" id="gabaritoEl" style="display:none;"></div>
+  </div>
+
+<script>
+const quizId = 'q1'; // Identificador único deste quiz
+
+const quiz = [
+{
+  "q": "O que significa o conceito de Cronaxia no contexto do Estimulador de Nervos Periféricos (ENP)?",
+  "options": [
+    "A) A intensidade mínima de corrente para produzir um potencial de ação.",
+    "B) O tempo mínimo utilizado para gerar potencial de ação, usando o dobro da intensidade da reobase.",
+    "C) O tempo de latência de um bloqueio locorregional.",
+    "D) A distância ideal da agulha em relação ao nervo."
+  ],
+  "answer": "B",
+  "explanation": "Cronaxia é o tempo mínimo utilizado, em que a corrente com o dobro da intensidade da reobase deve ser usada para desencadear potencial de ação [K&O, p. 45, 72]."
+}
+{
+  "q": "Qual é a faixa de intensidade de estímulo (miliamperagem) sugerida como ideal para assegurar eficiência e segurança no bloqueio de nervos periféricos guiado por ENP?",
+  "options": [
+    "A) 1,5 a 2,0 mA.",
+    "B) 0,8 a 1,0 mA.",
+    "C) 0,2 a 0,5 mA.",
+    "D) 0,05 a 0,1 mA."
+  ],
+  "answer": "C",
+  "explanation": "Valores entre 0,2 a 0,5 mA são sugeridos para assegurar eficiência e segurança no bloqueio dos nervos periféricos [K&O, p. 50, 78]."
+}
+{
+  "q": "Qual técnica é a mais utilizada e possui escassa porcentagem de erro para reconhecer a posição correta da agulha no espaço epidural?",
+  "options": [
+    "A) Sinal da gota em suspensão (Hanging drop sign).",
+    "B) Ultrassonografia (US).",
+    "C) Técnica da perda de resistência (LOR).",
+    "D) Teste de Raj."
+  ],
+  "answer": "C",
+  "explanation": "A técnica da perda de resistência (LOR) à injeção é a mais usada, com escassa porcentagem de erro [K&O, p. 147, 174]."
+}
+{
+  "q": "No bloqueio do plexo braquial por via subescapular em cães, qual é o volume recomendado de solução anestésica por quilograma?",
+  "options": [
+    "A) 0,1 ml/kg.",
+    "B) 0,2 ml/kg.",
+    "C) 0,4 ml/kg.",
+    "D) 0,6 ml/kg."
+  ],
+  "answer": "C",
+  "explanation": "O volume recomendado para o bloqueio subescapular do plexo braquial é de 0,4 ml/kg [K&O, p. 205, 242]."
+}
+{
+  "q": "Qual é a principal vantagem da utilização do ENP (Estimulador de Nervos Periféricos) na Anestesia Locorregional (ALR)?",
+  "options": [
+    "A) Dispensa o conhecimento de anatomia.",
+    "B) Reduz a dose total de solução anestésica necessária, diminuindo a chance de intoxicação sistêmica.",
+    "C) Garante sempre a injeção intraneural do fármaco.",
+    "D) Elimina a necessidade de sedação."
+  ],
+  "answer": "B",
+  "explanation": "O ENP permite redução da dose total de anestésico, identificando precisamente cada nervo [K&O, p. 49, 71]."
+}
+{
+  "q": "Qual técnica de anestesia local é indicada para a dessensibilização de camadas superficiais de pele e membranas mucosas (oral, traqueal, córnea)?",
+  "options": [
+    "A) Anestesia infiltrativa.",
+    "B) Anestesia peridural.",
+    "C) Anestesia terminal superficial (tópica).",
+    "D) Bloqueio perineural."
+  ],
+  "answer": "C",
+  "explanation": "Anestesias terminais superficiais têm ação pelo contato superficial com pele ou mucosa [K&O, p. 72, 103]."
+}
+{
+  "q": "Qual agulha utilizada na anestesia do neuroeixo é caracterizada por apresentar extremidade curvada e é útil para facilitar a implantação de um cateter epidural?",
+  "options": [
+    "A) Agulha tipo Quincke.",
+    "B) Agulha tipo Sprotte.",
+    "C) Agulha de Eldor.",
+    "D) Agulha de Tuohy."
+  ],
+  "answer": "D",
+  "explanation": "A agulha de Tuohy possui extremidade curvada, facilitando a implantação de cateter epidural [K&O, p. 55, 85, 177, 197]."
+}
+{
+  "q": "Qual é o volume de solução anestésica recomendado para a injeção epidural lombossacra em cães para ser utilizado em uma ovário-histerectomia?",
+  "options": [
+    "A) 0,05 ml/kg.",
+    "B) 0,10 ml/kg.",
+    "C) 0,22 ml/kg (1 ml para cada 4,5 kg).",
+    "D) 0,40 ml/kg."
+  ],
+  "answer": "C",
+  "explanation": "O volume de 0,22 ml/kg (1 ml/4,5 kg) promove bloqueios perineais, membros posteriores e abdome caudal [K&O, p. 144, 170]."
+}
+{
+  "q": "Qual é a principal complicação observada no uso de cateteres para infusão contínua de anestésicos locais para analgesia pós-operatória?",
+  "options": [
+    "A) Hipotensão severa.",
+    "B) Toxicidade ao anestésico local, com sinais como nistagmo e sonolência.",
+    "C) Bloqueio motor irreversível.",
+    "D) Fracasso do bloqueio devido à baixa concentração."
+  ],
+  "answer": "B",
+  "explanation": "Efeitos adversos incluem nistagmo, sonolência e toxicidade, revertidos com a retirada do cateter [K&O, p. 93, 126]."
+}
+{
+  "q": "O que é o \"Raj test\" em anestesia locorregional?",
+  "options": [
+    "A) A confirmação da punção dural.",
+    "B) A aspiração negativa de sangue ou LCR.",
+    "C) A inibição da resposta motora ao estímulo elétrico após a injeção da solução anestésica.",
+    "D) A detecção da perda de resistência."
+  ],
+  "answer": "C",
+  "explanation": "O Raj test confirma a correta deposição do anestésico quando interrompe a resposta motora ao estímulo do ENP [K&O, p. 50, 78, 90]."
+}
+{
+  "q": "Qual a principal causa de insucesso no bloqueio peribulbar?",
+  "options": [
+    "A) Injeção de volume insuficiente.",
+    "B) Não respeitar o período de latência do fármaco.",
+    "C) Volume excessivo de solução anestésica.",
+    "D) Lesão do nervo óptico."
+  ],
+  "answer": "B",
+  "explanation": "A principal causa de insucesso é não respeitar o período de latência do fármaco [K&O, p. 60, 90]."
+}
+{
+  "q": "O bloqueio do nervo infraorbital (acesso intraoral) em cães, quando a agulha penetra o canal, insensibiliza os dentes e tecidos adjacentes até qual dente?",
+  "options": [
+    "A) Dentes incisivos.",
+    "B) Dente canino superior.",
+    "C) Dente quarto pré-molar.",
+    "D) Todos os molares."
+  ],
+  "answer": "C",
+  "explanation": "A introdução da agulha pelo canal infraorbital promove insensibilização até o dente quarto pré-molar [K&O, p. 119, 145]."
+}
+{
+  "q": "A anestesia peridural intercoccígea em bovinos é efetuada preferencialmente com qual medicamento e volume para intervenções a nível de reto, ânus ou vagina?",
+  "options": [
+    "A) Bupivacaína 0,5%, 10 ml.",
+    "B) Lidocaína 2%, 5 a 7 ml.",
+    "C) Morfina, 0,1 mg/kg.",
+    "D) Xilazina, 0,2 mg/kg."
+  ],
+  "answer": "B",
+  "explanation": "Anestesia intercoccígea em bovinos é feita com 5 a 7 ml de lidocaína a 2% [Massone, p. 182, 454]."
+}
+{
+  "q": "No bloqueio do nervo alveolar mandibular, a insensibilização dos dois terços anteriores da língua e o formigamento são consequências de qual bloqueio acidental?",
+  "options": [
+    "A) Nervo mentual.",
+    "B) Nervo bucal.",
+    "C) Nervo lingual.",
+    "D) Nervo maxilar."
+  ],
+  "answer": "C",
+  "explanation": "O nervo lingual pode ser bloqueado acidentalmente, causando formigamento e insensibilização dos dois terços anteriores da língua [K&O, Cap. 5]."
+}
+{
+  "q": "Qual complicação relacionada ao derrubamento e contenção inadequada em equinos é causada pela compressão do nervo devido à postura no decúbito lateral prolongado?",
+  "options": [
+    "A) Paralisia do nervo facial.",
+    "B) Paralisia do nervo radial.",
+    "C) Miopatia generalizada.",
+    "D) Síndrome cólica."
+  ],
+  "answer": "B",
+  "explanation": "Decúbito lateral prolongado pode comprimir o nervo radial, causando paralisia [Massone, p. 154, 415]."
+}
+{
+  "q": "No bloqueio do nervo isquiático, o que indica que a ponta da agulha se aproximou do nervo sob neuroestimulação?",
+  "options": [
+    "A) Contração do músculo sartório.",
+    "B) Contração do quadríceps femoral.",
+    "C) Contração do bíceps femoral.",
+    "D) Contração do músculo gastrocnêmio (extensão do tarso) ou flexão do tarso."
+  ],
+  "answer": "D",
+  "explanation": "A aproximação do nervo isquiático provoca contração do gastrocnêmio (extensão do tarso) ou flexão do tarso [K&O, p. 249, 286]."
+}
+{
+  "q": "Qual é a principal desvantagem da abordagem peridural lombossacra em ovinos e caprinos, em comparação com cães, que requer cautela?",
+  "options": [
+    "A) O filum terminale é mais caudal, aumentando o risco de lesão medular.",
+    "B) O espaço epidural é muito estreito.",
+    "C) A pressão intra-abdominal é muito alta.",
+    "D) A dose de anestésico local é sempre maior."
+  ],
+  "answer": "A",
+  "explanation": "O filum terminale mais caudal aumenta o risco de lesão medular em ovinos e caprinos [Massone, p. 136, 394]."
+}
+{
+  "q": "A anestesia local infiltrativa em 'L' invertido ou em retângulo, usada em bovinos para laparotomias (excluindo a linha branca), deve ser feita preferencialmente com lidocaína em qual concentração?",
+  "options": [
+    "A) 4%.",
+    "B) 2%.",
+    "C) 1%.",
+    "D) 0,5%."
+  ],
+  "answer": "C",
+  "explanation": "Para laparotomias, a lidocaína 1% permite anestesia hábil e aumento de volume sem risco de intoxicação [Massone, p. 135, 393]."
+}
+{
+  "q": "Qual a angulação correta da cabeça em relação ao pescoço em equinos para a introdução da sonda endotraqueal durante a intubação?",
+  "options": [
+    "A) Ângulo de 90°.",
+    "B) Ângulo de 130 a 150°.",
+    "C) Posição de esfinge (decúbito esternal).",
+    "D) Ângulo de 45°."
+  ],
+  "answer": "B",
+  "explanation": "A cabeça deve formar ângulo de 130 a 150° em relação ao pescoço, facilitando a intubação [Massone, p. 155, 417]."
+}
+{
+  "q": "Qual é a dose recomendada de Morfina quando administrada por via epidural em cães, e qual é o período de duração do efeito analgésico que pode ser alcançado?",
+  "options": [
+    "A) 0,01 mg/kg; 3 a 5 horas.",
+    "B) 0,1 mg/kg; 10 a 24 horas.",
+    "C) 1 mg/kg; 6 a 8 horas.",
+    "D) 2 mg/kg; 24 a 72 horas."
+  ],
+  "answer": "B",
+  "explanation": "A morfina 0,1 mg/kg epidural proporciona analgesia prolongada de 10 a 24 horas [K&O, Cap. 6]."
+}
+];
+
+let currentQuestion = 0;
+let selectedOption = null;
+let locked = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('questionText');
+const optionsEl = document.getElementById('optionsList');
+const feedbackEl = document.getElementById('feedbackBox');
+const feedbackTitle = document.getElementById('feedbackTitle');
+const feedbackIcon = document.getElementById('feedbackIcon');
+const feedbackExplanation = document.getElementById('feedbackExplanation');
+const btnConfirm = document.getElementById('btnConfirm');
+const btnNext = document.getElementById('btnNext');
+const btnRestart = document.getElementById('btnRestart');
+const gabaritoEl = document.getElementById('gabaritoEl');
+
+function loadQuestion() {
+  locked = false;
+  selectedOption = null;
+  const q = quiz[currentQuestion];
+  questionEl.textContent = `Q${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML = '';
+  feedbackEl.style.display = 'none';
+  feedbackEl.setAttribute('aria-hidden','true');
+  btnConfirm.style.display = 'inline-block';
+  btnNext.style.display = 'none';
+  btnRestart.style.display = 'none';
+
+  q.options.forEach((opt,index)=>{
+    const li = document.createElement('li');
+    li.className = 'option';
+    li.tabIndex = 0;
+    li.setAttribute('role','button');
+    li.setAttribute('data-index', index);
+    li.innerHTML = `<span style="flex:1">${opt}</span>`;
+    const onSelect = ()=>{
+      if(locked) return;
+      optionsEl.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+      li.classList.add('selected');
+      selectedOption = index;
+    };
+    li.addEventListener('click',onSelect);
+    li.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onSelect(); }
+    });
+    optionsEl.appendChild(li);
+  });
+
+  if(typeof userAnswers[currentQuestion]!=='undefined'&&userAnswers[currentQuestion]!==null){
+    const pre = userAnswers[currentQuestion];
+    const preLi = optionsEl.querySelector(`.option[data-index="${pre}"]`);
+    if(preLi) preLi.classList.add('selected');
+    selectedOption = pre;
+  }
+}
+
+btnConfirm.addEventListener('click',()=>{
+  if(selectedOption===null){
+    btnConfirm.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-4px)' }, { transform: 'translateY(0)' }], { duration: 220 });
+    return;
+  }
+  locked=true;
+  const correctIndex = quiz[currentQuestion].answer;
+  const optionsLi = optionsEl.querySelectorAll('.option');
+
+  optionsLi.forEach((li,index)=>{
+    li.classList.remove('selected');
+    if(index===correctIndex) li.classList.add('correct');
+    if(index===selectedOption && index!==correctIndex) li.classList.add('incorrect');
+    li.style.pointerEvents='none';
+  });
+
+  userAnswers[currentQuestion] = selectedOption;
+
+  if(selectedOption===correctIndex){
+    feedbackTitle.textContent='Correto!';
+    feedbackIcon.textContent='✔️';
+    feedbackEl.className='feedback correct';
+  }else{
+    feedbackTitle.textContent='Incorreto';
+    feedbackIcon.textContent='❌';
+    feedbackEl.className='feedback incorrect';
+  }
+
+  feedbackExplanation.innerHTML=`<strong>Por que:</strong> ${quiz[currentQuestion].explanation}`;
+
+  feedbackEl.style.display='flex';
+  feedbackEl.setAttribute('aria-hidden','false');
+
+  btnConfirm.style.display='none';
+  if(currentQuestion<quiz.length-1){
+    btnNext.style.display='inline-block';
+  }else{
+    btnNext.textContent='Ver Gabarito';
+    btnNext.style.display='inline-block';
+  }
+});
+
+btnNext.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<quiz.length){
+    loadQuestion();
+    btnNext.textContent='Próxima Questão';
+  }else{
+    showGabarito();
+  }
+});
+
+btnRestart.addEventListener('click',()=>{
+  currentQuestion=0;
+  userAnswers=[];
+  btnNext.textContent='Próxima Questão';
+  questionEl.style.display='';
+  optionsEl.style.display='';
+  feedbackEl.style.display='none';
+  gabaritoEl.style.display='none';
+  loadQuestion();
+});
+
+function showGabarito(){
+  questionEl.style.display='none';
+  optionsEl.style.display='none';
+  feedbackEl.style.display='none';
+  btnConfirm.style.display='none';
+  btnNext.style.display='none';
+
+  gabaritoEl.style.display='block';
+  gabaritoEl.innerHTML='<h2>Gabarito e explicações</h2>';
+
+  // **SALVA PONTUAÇÃO NO LOCALSTORAGE**
+  let correctCount = userAnswers.reduce((acc,ans,idx)=> acc + (ans===quiz[idx].answer?1:0),0);
+  let percent = Math.round((correctCount/quiz.length)*100);
+  localStorage.setItem('score_'+quizId, percent);
+
+  quiz.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='g-item';
+    const userIdx = typeof userAnswers[i]!=='undefined'?userAnswers[i]:null;
+    const correctIdx = q.answer;
+    const userText = userIdx===null?'Não respondeu':q.options[userIdx];
+    const correctText = q.options[correctIdx];
+    const ok = userIdx===correctIdx;
+    const status = ok?`<span class="answer-correct">✔ Correta</span>`:`<span class="answer-wrong">✖ Incorreta</span>`;
+    div.innerHTML=`
+      <div class="meta"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div><span class="you">Sua resposta:</span> ${userText} ${userIdx!==null?'&nbsp;•&nbsp;'+status:''}</div>
+      <div><strong>Resposta correta:</strong> <span class="answer-correct">${correctText}</span></div>
+      <div class="explanation" style="margin-top:8px"><strong>Explicação:</strong> ${q.explanation}</div>
+    `;
+    gabaritoEl.appendChild(div);
+  });
+
+  const backRow=document.createElement('div');
+  backRow.style.marginTop='14px';
+  backRow.style.display='flex';
+  backRow.style.gap='10px';
+
+  const btnVoltar=document.createElement('button');
+  btnVoltar.className='btn btn-back';
+  btnVoltar.textContent='Voltar';
+  btnVoltar.title='Voltar (history.back())';
+  btnVoltar.addEventListener('click',()=>{
+    if(window.history.length>1) window.history.back();
+    else window.location.href='#';
+  });
+
+  const btnRefazer=document.createElement('button');
+  btnRefazer.className='btn';
+  btnRefazer.textContent='Refazer Quiz';
+  btnRefazer.addEventListener('click',()=>{
+    currentQuestion=0;
+    userAnswers=[];
+    gabaritoEl.style.display='none';
+    questionEl.style.display='';
+    optionsEl.style.display='';
+    loadQuestion();
+  });
+
+  backRow.appendChild(btnVoltar);
+  backRow.appendChild(btnRefazer);
+  gabaritoEl.appendChild(backRow);
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
