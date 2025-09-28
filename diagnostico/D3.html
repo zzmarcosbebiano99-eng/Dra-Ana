@@ -145,126 +145,115 @@ const quizId = 'D3'; // Identificador único deste quiz
 
 const quiz = [
   {
-  question: "Para a avaliação ultrassonográfica de estruturas cervicais muito pequenas, como as glândulas tireoide e paratireoide, qual frequência de transdutor é recomendada?",
-  options: [
-    "Transdutores setoriais de baixa frequência (3-5 MHz).",
-    "Transdutores lineares de alta frequência (8-15 MHz).",
-    "Transdutores curvilíneos de baixa penetração.",
-    "Transdutores Doppler de onda pulsada."
-  ],
-  answer: 1,
-  explanation: "Transdutores lineares de alta frequência (8-15 MHz) e transdutores curvilíneos fornecem as melhores imagens de estruturas pequenas e com arquitetura interna complexa, como a tireoide e paratireoides."
-},
-{
-  question: "O linfonodo mandibular normal em cães é tipicamente descrito com qual espessura e ecogenicidade relativa à gordura circundante?",
-  options: [
-    "Mais de 1 cm de espessura e hiperecogênico.",
-    "Menos de 0,5 cm de espessura e levemente hipoecóico ou isoecóico.",
-    "5 mm de largura e marcadamente anecóico.",
-    "Mais de 2 cm de comprimento e isoecóico ao músculo."
-  ],
-  answer: 1,
-  explanation: "Os linfonodos mandibulares geralmente têm menos de 0,5 cm de espessura e são levemente hipoecóicos em relação à gordura circundante, embora possam ser isoecóicos."
-},
-{
-  question: "Qual o achado ultrassonográfico sugestivo de linfadenopatia inflamatória ou neoplásica?",
-  options: [
-    "Aumento, forma arredondada e hipoecogenicidade.",
-    "Redução de tamanho e forma fusiforme.",
-    "Diminuição da ecogenicidade com margens bem definidas.",
-    "Aparência hiper-refletiva com sombreamento acústico."
-  ],
-  answer: 0,
-  explanation: "Linfonodos afetados por doença inflamatória ou neoplásica estão aumentados, arredondados e hipoecóicos."
-},
-{
-  question: "Qual é a característica ultrassonográfica da traqueia em um plano transversal devido ao seu conteúdo de ar?",
-  options: [
-    "Uma interface hipoecóica com realce acústico distal.",
-    "Uma interface hiperecóica e convexa com sombra acústica distal.",
-    "Uma série de linhas paralelas de reverberação (artefato de anel para baixo).",
-    "Uma estrutura tubular anecóica com sombreamento de borda."
-  ],
-  answer: 1,
-  explanation: "Em um plano transversal, a traqueia aparece como uma interface hiperecoica e convexa com sombra acústica distal obscurecendo o lúmen."
-},
-{
-  question: "Qual é o achado ultrassonográfico mais comum em cães com hiperparatireoidismo secundário à insuficiência renal crônica, em comparação com cães normais ou com insuficiência renal aguda?",
-  options: [
-    "Glândulas paratireoides ausentes.",
-    "Glândulas paratireoides mais curtas.",
-    "Glândulas paratireoides mais longas.",
-    "Glândulas paratireoides fortemente hiperecóicas."
-  ],
-  answer: 2,
-  explanation: "Em cães com insuficiência renal crônica, as glândulas paratireoides são mais longas (mediana, 5,7 mm) em comparação com cães normais ou com insuficiência renal aguda (mediana, 3,3 mm e 2,7 mm, respectivamente)."
-},
-{
-  question: "Por que a radiografia torácica ou a TC devem preceder a ultrassonografia torácica na avaliação de estruturas intratorácicas, em um animal normal?",
-  options: [
-    "Para confirmar a presença de atelectasia.",
-    "Para confirmar a presença de lesão e identificar uma janela acústica adequada, e para descartar pneumotórax.",
-    "A ultrassonografia é sempre a modalidade de escolha inicial.",
-    "Porque o ultrassom só pode ser usado em casos de derrame pleural."
-  ],
-  answer: 1,
-  explanation: "A avaliação das estruturas intratorácicas é dificultada pela interposição de tecido pulmonar aerado. A radiografia torácica ou a TC devem preceder o ultrassom para confirmar a presença de uma lesão, identificar uma janela acústica adequada e descartar pneumotórax."
-},
-{
-  question: "Qual transdutor é geralmente selecionado ao usar uma janela intercostal (entre as costelas) para examinar as estruturas torácicas?",
-  options: [
-    "Transdutor linear de baixa frequência (5 MHz).",
-    "Transdutor curvilíneo ou microconvexo com pegada pequena.",
-    "Transdutor Phased Array de alta frequência.",
-    "Transdutor linear de ampla pegada."
-  ],
-  answer: 1,
-  explanation: "Normalmente, uma sonda ultrassonográfica curvilínea ou microconvexa com uma pegada pequena deve ser selecionada ao usar uma janela intercostal."
-},
-{
-  question: "No exame ultrassonográfico torácico, o derrame pleural é tipicamente visualizado onde?",
-  options: [
-    "Dorsalmente ao coração e pulmões.",
-    "Cranialmente ao diafragma, na porção dependente do tórax.",
-    "Adjacente à coluna vertebral.",
-    "Próximo à entrada torácica."
-  ],
-  answer: 1,
-  explanation: "O derrame pleural pode ser visto cranialmente ao diafragma, e geralmente se acumula na porção dependente do tórax."
-},
-{
-  question: "O que a ultrassonografia com contraste (CEUS) demonstrou ser capaz de fazer que o ultrassom em escala de cinza pode ter dificuldade em casos de pequenos nódulos de hemangiossarcoma no fígado?",
-  options: [
-    "Confirmar malignidade por washout tardio.",
-    "Aumentar a sensibilidade para nódulos menores (3-5 mm).",
-    "Diferenciar malignidade de benignidade em massas maiores que 3 cm.",
-    "Identificar apenas lesões císticas."
-  ],
-  answer: 1,
-  explanation: "O ultrassom com contraste pode melhorar a sensibilidade para nódulos menores, detectando pequenos nódulos de hemangiossarcoma (3-5 mm) no fígado de cães que não foram reconhecidos na imagem em escala de cinza."
-},
-{
-  question: "Qual tipo de massa mediastinal cranial em cães tende a apresentar mais comumente um componente cístico na ultrassonografia?",
-  options: [
-    "Linfomas",
-    "Carcinomas de tireoide",
-    "Timomas",
-    "Tumores do corpo carotídeo"
-  ],
-  answer: 2,
-  explanation: "Linfomas mediastinais cranianos tendem a aparecer como massas sólidas, enquanto os timomas têm mais comumente um componente cístico."
-},
-{
-  question: "Qual padrão ultrassonográfico é comumente encontrado em casos de torção do lobo pulmonar?",
-  options: [
-    "Padrão alveolar homogêneo hiperecogênico.",
-    "Periferia hipoecóica com focos hiperecóicos dispersos na porção central (gás/broncograma líquido).",
-    "Múltiplas lesões cavitárias anecóicas.",
-    "Espessamento da parede traqueal."
-  ],
-  answer: 1,
-  explanation: "O lobo pulmonar torcido pode apresentar-se com a porção periférica hipoecóica e focos hiperecóicos dispersos na porção central associados a artefatos de reverberação, compatível com gás (broncograma de líquido)."
-},
+    "q": "O que o termo 'sombra limpa' (clean shadow) implica em relação ao sombreamento acústico?",
+    "options": [
+      "A) Sombreamento homogêneo atrás de uma interface hiper-atenuante, como cálculos ou osso.",
+      "B) Sombreamento não homogêneo atrás de uma interface de gás.",
+      "C) Artefato de reverberação visto distalmente a um corpo estranho metálico.",
+      "D) Zonas triangulares discretas de baixa amplitude na borda de uma estrutura curva."
+    ],
+    "answer": 0,
+    "explanation": "Uma sombra uniformemente anecóica é chamada de 'limpa'. Ocorre atrás de interfaces hiperatenuantes como osso, cálculos ou corpos estranhos compactos."
+  },
+  {
+    "q": "O realce acústico (ou aumento de transmissão) é um artefato diagnóstico útil, tipicamente reconhecido profundamente a qual tipo de estrutura?",
+    "options": [
+      "A) Gás luminal gastrointestinal",
+      "B) Tecido ósseo",
+      "C) Uma estrutura cheia de líquido (ex: cisto ou vesícula biliar)",
+      "D) Uma massa sólida hipoecóica"
+    ],
+    "answer": 2,
+    "explanation": "O realce acústico ocorre quando as ondas atravessam estruturas pouco atenuantes, como cistos ou a vesícula biliar, resultando em aumento de brilho distal."
+  },
+  {
+    "q": "O que o artefato de média de volume (ou espessura de corte) pode resultar em estruturas anecóicas cheias de líquido, como a vesícula biliar?",
+    "options": [
+      "A) Um artefato de reverberação intensa.",
+      "B) Uma pseudo-lama (pseudo-sludge).",
+      "C) Sombreamento acústico limpo.",
+      "D) Um artefato de imagem espelhada."
+    ],
+    "answer": 1,
+    "explanation": "O artefato de média de volume pode gerar pseudo-lama em estruturas anecóicas, pois inclui ecos de tecidos adjacentes no feixe."
+  },
+  {
+    "q": "Qual é o artefato que aparece como uma série de ecos sucessivos curtos e próximos, diminuindo em intensidade e largura em profundidade, frequentemente visto com finas camadas de gás ou pellets metálicos?",
+    "options": [
+      "A) Artefato de Anel para Baixo (Ring Down)",
+      "B) Sombreamento de Borda",
+      "C) Cauda de Cometa",
+      "D) Artefato de Aliasing"
+    ],
+    "answer": 2,
+    "explanation": "A cauda de cometa é um tipo de reverberação curta, vista com bolhas de gás ou pellets metálicos, aparecendo como ecos sucessivos estreitos e próximos."
+  },
+  {
+    "q": "No Doppler Espectral Pulsado (PWD), qual fenômeno ocorre quando a velocidade do fluxo sanguíneo excede o limite de Nyquist?",
+    "options": [
+      "A) Alargamento espectral",
+      "B) Aliasing",
+      "C) Reflexão especular",
+      "D) Hiper-reflexão"
+    ],
+    "answer": 1,
+    "explanation": "Quando o fluxo excede o limite de Nyquist, ocorre aliasing, em que o espectro 'enrola' para o lado oposto da escala de velocidade."
+  },
+  {
+    "q": "Qual tipo de transdutor e frequência é geralmente recomendado para a avaliação do globo ocular?",
+    "options": [
+      "A) Transdutores de baixa frequência (3-5 MHz) aplicados na pálpebra.",
+      "B) Transdutores de alta frequência aplicados diretamente na córnea ou limbo.",
+      "C) Transdutores convexos para um campo de visão maior.",
+      "D) Transdutores setoriais de média frequência."
+    ],
+    "answer": 1,
+    "explanation": "A avaliação do globo ocular é feita com transdutores de alta frequência aplicados diretamente na córnea ou limbo."
+  },
+  {
+    "q": "O que a córnea mais comumente representa na ultrassonografia?",
+    "options": [
+      "A) Uma linha ecogênica única e hiperecoica.",
+      "B) Um corpo anecóico completamente.",
+      "C) Uma linha ecogênica paralela dupla com um centro quase anecóico.",
+      "D) Uma estrutura cística multiloculada."
+    ],
+    "answer": 2,
+    "explanation": "A córnea se apresenta como duas linhas ecogênicas paralelas delimitando um centro hipo/anecóico."
+  },
+  {
+    "q": "Qual condição degenerativa vítrea é caracterizada por pequenos focos de complexos de cálcio-lipídio (0,03 a 0,1 mm) que são refletores discretos suspensos na estrutura vítrea?",
+    "options": [
+      "A) Degeneração vítrea sincitilante (Synchisis scintillans)",
+      "B) Ruptura capsular",
+      "C) Hialose asteroide",
+      "D) Hemorragia vítrea"
+    ],
+    "answer": 2,
+    "explanation": "A hialose asteroide é a degeneração vítrea mais comum em idosos, caracterizada por pequenos focos de cálcio-lipídio brilhantes suspensos no vítreo."
+  },
+  {
+    "q": "Na luxação posterior da lente, onde a lente ecogênica (catarata) se desloca completamente?",
+    "options": [
+      "A) Na câmara anterior, imediatamente posterior à córnea.",
+      "B) Na câmara posterior, adjacente à íris.",
+      "C) Na cavidade vítrea, próximo ao disco óptico.",
+      "D) No espaço sub-retiniano."
+    ],
+    "answer": 2,
+    "explanation": "Na luxação posterior, a lente desloca-se totalmente para a cavidade vítrea, geralmente próxima ao disco óptico."
+  },
+  {
+    "q": "Qual tipo de catarata pode reduzir consistentemente a profundidade da câmara anterior e aumentar o risco de estiramento e ruptura capsular?",
+    "options": [
+      "A) Catarata incipiente",
+      "B) Catarata hiperosmótica madura diabética (intumescente)",
+      "C) Catarata Morgagniana",
+      "D) Catarata cortical anterior"
+    ],
+    "answer": 1,
+    "explanation": "A catarata diabética intumescente aumenta o volume da lente, reduz a profundidade da câmara anterior e aumenta o risco de ruptura capsular."
+  }
 ];
 
 
