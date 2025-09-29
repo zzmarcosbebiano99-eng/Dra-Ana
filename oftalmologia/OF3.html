@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oftalmologia</title>
+<style>
+  :root{
+    --bg:#f5f6fa;
+    --card:#ffffff;
+    --muted:#777;
+    --accent:#007bff;
+    --green:#28a745;
+    --red:#dc3545;
+    --green-bg:#d4edda;
+    --red-bg:#f8d7da;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    padding: 50px 16px;
+  }
+
+  .quiz-container {
+    width: 680px;
+    max-width: 95%;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15,20,30,0.06);
+    padding: 30px;
+  }
+
+  .quiz-header { margin-bottom: 18px; }
+  .quiz-header h1 { font-size: 22px; margin-bottom: 4px; }
+  .quiz-header p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .question { margin: 18px 0; font-weight: 600; font-size: 18px; }
+  .options { list-style: none; padding: 0; margin: 0; }
+
+  .option {
+    background: #fbfcfd;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(15,20,30,0.04);
+  }
+
+  .option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(15,20,30,0.04);
+    background: #f4f7fb;
+  }
+
+  .option.selected {
+    background: linear-gradient(180deg,#eef5ff, #f6fbff);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.08) inset;
+    outline: none;
+  }
+
+  .option.correct {
+    background: linear-gradient(180deg, #eef9f0, #f7fcf8);
+    border-left: 6px solid var(--green);
+    border-color: rgba(40,167,69,0.14);
+  }
+
+  .option.incorrect {
+    background: linear-gradient(180deg, #fff5f6, #fff8f9);
+    border-left: 6px solid var(--red);
+    border-color: rgba(220,53,69,0.08);
+    opacity: 0.98;
+  }
+
+  .feedback {
+    margin-top: 16px;
+    font-size: 15px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    box-shadow: 0 6px 18px rgba(15,20,30,0.03);
+  }
+
+  .feedback .icon { font-size: 20px; margin-top: 2px; }
+  .feedback.correct { background: var(--green-bg); color: #155724; border-left: 6px solid var(--green); }
+  .feedback.incorrect { background: var(--red-bg); color: #721c24; border-left: 6px solid var(--red); }
+
+  .explanation { margin-top: 10px; font-size: 14px; color: #222; line-height: 1.4; background: rgba(0,0,0,0.01); padding: 10px; border-radius: 8px; }
+
+  .btn-row { display:flex; gap:12px; margin-top: 18px; align-items:center; }
+  .btn { padding: 11px 20px; border: none; border-radius: 9px; background-color: var(--accent); color: white; cursor: pointer; font-size: 15px; transition: background .12s ease, transform .08s; }
+  .btn:hover { transform: translateY(-2px); background-color: #0056b3; }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-secondary { background: #6c757d; }
+  .btn-back { background: #000; color: #fff; }
+
+  .gabarito { margin-top: 20px; }
+  .gabarito h2 { margin: 0 0 12px 0; font-size: 20px; }
+  .g-item { border-radius: 10px; padding: 12px; margin-bottom: 12px; background: #fbfcfd; border: 1px solid rgba(15,20,30,0.04); }
+  .g-item .meta { font-size: 14px; margin-bottom: 8px; }
+  .g-item .meta .you { font-weight: 600; }
+  .answer-correct { color: var(--green); font-weight:700; }
+  .answer-wrong { color: var(--red); font-weight:700; }
+
+  @media (max-width:480px){ .quiz-container { padding: 18px; } .question { font-size:16px; } }
+</style>
+</head>
+<body>
+  <div class="quiz-container" role="application" aria-label="Questionário de Oftalmologia">
+    <div class="quiz-header">
+      <h1></h1>
+      <p></p>
+    </div>
+
+    <div class="question" id="questionText"></div>
+    <ul class="options" id="optionsList" aria-live="polite"></ul>
+
+    <div class="feedback" id="feedbackBox" role="status" aria-hidden="true">
+      <div class="icon" id="feedbackIcon">✔️</div>
+      <div>
+        <div id="feedbackTitle" style="font-weight:700"></div>
+        <div class="explanation" id="feedbackExplanation"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-confirm" id="btnConfirm">Confirmar Resposta</button>
+      <button class="btn btn-next" id="btnNext" style="display:none;">Próxima Questão</button>
+      <button class="btn btn-secondary" id="btnRestart" style="display:none;">Refazer</button>
+    </div>
+
+    <div class="gabarito" id="gabaritoEl" style="display:none;"></div>
+  </div>
+
+<script>
+const quizId = 'OF3'; // Identificador único deste quiz
+
+const quiz = [
+
+  {
+    "q": "Qual é a causa mais comum de cegueira súbita em cães idosos?",
+    "options": [
+      "A. Glaucoma agudo",
+      "B. Catarata hipermadura",
+      "C. Descolamento de retina",
+      "D. Neuropatia óptica traumática"
+    ],
+    "answer": 0,
+    "explanation": "O glaucoma agudo é uma das causas mais comuns de cegueira súbita em cães idosos, devido ao aumento súbito da pressão intraocular."
+  },
+  {
+    "q": "O que caracteriza a ceratoconjuntivite seca (KCS) em cães?",
+    "options": [
+      "A. Produção excessiva de lágrimas",
+      "B. Produção reduzida de lágrima aquosa",
+      "C. Obstrução do canal nasolacrimal",
+      "D. Excesso de secreção mucopurulenta devido à hiperprodução lipídica"
+    ],
+    "answer": 1,
+    "explanation": "A KCS é causada pela produção reduzida da fase aquosa da lágrima, levando a secreção mucopurulenta crônica e conjuntivite."
+  },
+  {
+    "q": "Qual é o teste padrão-ouro para diagnóstico de ceratoconjuntivite seca?",
+    "options": [
+      "A. Teste da fluoresceína",
+      "B. Teste de Jones",
+      "C. Teste de Schirmer I",
+      "D. Teste da rosa bengala"
+    ],
+    "answer": 2,
+    "explanation": "O teste de Schirmer I mede a produção basal e reflexa da lágrima, sendo padrão-ouro no diagnóstico de KCS."
+  },
+  {
+    "q": "Na uveíte anterior, qual achado clínico é frequente?",
+    "options": [
+      "A. Midríase fixa",
+      "B. Miose dolorosa",
+      "C. Proptose ocular",
+      "D. Aumento da pressão intraocular"
+    ],
+    "answer": 1,
+    "explanation": "A miose é uma manifestação comum da uveíte anterior, devido ao espasmo do músculo esfíncter da íris."
+  },
+  {
+    "q": "Qual técnica cirúrgica é indicada em casos de úlcera de córnea profunda com risco de perfuração?",
+    "options": [
+      "A. Flap conjuntival",
+      "B. Enucleação",
+      "C. Capsulectomia",
+      "D. Trabeculectomia"
+    ],
+    "answer": 0,
+    "explanation": "O flap conjuntival fornece vascularização e suporte mecânico para a cicatrização de úlceras profundas de córnea."
+  },
+  {
+    "q": "Qual é o sinal clínico mais sugestivo de glaucoma crônico em cães?",
+    "options": [
+      "A. Hifema",
+      "B. Buftalmia (globo ocular aumentado)",
+      "C. Miose dolorosa",
+      "D. Secreção mucopurulenta"
+    ],
+    "answer": 1,
+    "explanation": "O glaucoma crônico leva à buftalmia devido ao aumento persistente da pressão intraocular."
+  },
+  {
+    "q": "Em gatos, qual é a doença infecciosa frequentemente associada a uveíte anterior crônica?",
+    "options": [
+      "A. FIV (Vírus da Imunodeficiência Felina)",
+      "B. Cinomose",
+      "C. Babesiose",
+      "D. Brucelose"
+    ],
+    "answer": 0,
+    "explanation": "FIV, FeLV e toxoplasmose são causas infecciosas comuns de uveíte anterior crônica em gatos."
+  },
+  {
+    "q": "O teste da fluoresceína é utilizado para:",
+    "options": [
+      "A. Avaliar integridade do epitélio corneano",
+      "B. Diagnosticar ceratoconjuntivite seca",
+      "C. Mensurar produção lacrimal",
+      "D. Confirmar descolamento de retina"
+    ],
+    "answer": 0,
+    "explanation": "A fluoresceína se adere ao estroma corneano exposto, permitindo identificar úlceras e erosões."
+  },
+  {
+    "q": "Qual é o tratamento de primeira escolha para ceratoconjuntivite seca imunomediada em cães?",
+    "options": [
+      "A. Corticoide tópico",
+      "B. Ciclosporina tópica",
+      "C. Atropina tópica",
+      "D. Enucleação"
+    ],
+    "answer": 1,
+    "explanation": "A ciclosporina tópica aumenta a produção lacrimal e modula a resposta imunológica na KCS."
+  },
+  {
+    "q": "Qual alteração oftálmica é típica em cães com hipertensão arterial sistêmica?",
+    "options": [
+      "A. Melting corneal",
+      "B. Hemorragias retinianas e descolamento de retina",
+      "C. Glaucoma primário",
+      "D. Sinequia posterior"
+    ],
+    "answer": 1,
+    "explanation": "A hipertensão arterial pode causar hemorragias retinianas e descolamento de retina, levando à cegueira súbita."
+  }
+];
+
+
+
+
+
+
+
+
+
+
+let currentQuestion = 0;
+let selectedOption = null;
+let locked = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('questionText');
+const optionsEl = document.getElementById('optionsList');
+const feedbackEl = document.getElementById('feedbackBox');
+const feedbackTitle = document.getElementById('feedbackTitle');
+const feedbackIcon = document.getElementById('feedbackIcon');
+const feedbackExplanation = document.getElementById('feedbackExplanation');
+const btnConfirm = document.getElementById('btnConfirm');
+const btnNext = document.getElementById('btnNext');
+const btnRestart = document.getElementById('btnRestart');
+const gabaritoEl = document.getElementById('gabaritoEl');
+
+function loadQuestion() {
+  locked = false;
+  selectedOption = null;
+  const q = quiz[currentQuestion];
+  questionEl.textContent = `Q${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML = '';
+  feedbackEl.style.display = 'none';
+  feedbackEl.setAttribute('aria-hidden','true');
+  btnConfirm.style.display = 'inline-block';
+  btnNext.style.display = 'none';
+  btnRestart.style.display = 'none';
+
+  q.options.forEach((opt,index)=>{
+    const li = document.createElement('li');
+    li.className = 'option';
+    li.tabIndex = 0;
+    li.setAttribute('role','button');
+    li.setAttribute('data-index', index);
+    li.innerHTML = `<span style="flex:1">${opt}</span>`;
+    const onSelect = ()=>{
+      if(locked) return;
+      optionsEl.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+      li.classList.add('selected');
+      selectedOption = index;
+    };
+    li.addEventListener('click',onSelect);
+    li.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onSelect(); }
+    });
+    optionsEl.appendChild(li);
+  });
+
+  if(typeof userAnswers[currentQuestion]!=='undefined'&&userAnswers[currentQuestion]!==null){
+    const pre = userAnswers[currentQuestion];
+    const preLi = optionsEl.querySelector(`.option[data-index="${pre}"]`);
+    if(preLi) preLi.classList.add('selected');
+    selectedOption = pre;
+  }
+}
+
+btnConfirm.addEventListener('click',()=>{
+  if(selectedOption===null){
+    btnConfirm.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-4px)' }, { transform: 'translateY(0)' }], { duration: 220 });
+    return;
+  }
+  locked=true;
+  const correctIndex = quiz[currentQuestion].answer;
+  const optionsLi = optionsEl.querySelectorAll('.option');
+
+  optionsLi.forEach((li,index)=>{
+    li.classList.remove('selected');
+    if(index===correctIndex) li.classList.add('correct');
+    if(index===selectedOption && index!==correctIndex) li.classList.add('incorrect');
+    li.style.pointerEvents='none';
+  });
+
+  userAnswers[currentQuestion] = selectedOption;
+
+  if(selectedOption===correctIndex){
+    feedbackTitle.textContent='Correto!';
+    feedbackIcon.textContent='✔️';
+    feedbackEl.className='feedback correct';
+  }else{
+    feedbackTitle.textContent='Incorreto';
+    feedbackIcon.textContent='❌';
+    feedbackEl.className='feedback incorrect';
+  }
+
+  feedbackExplanation.innerHTML=`<strong>Por que:</strong> ${quiz[currentQuestion].explanation}`;
+
+  feedbackEl.style.display='flex';
+  feedbackEl.setAttribute('aria-hidden','false');
+
+  btnConfirm.style.display='none';
+  if(currentQuestion<quiz.length-1){
+    btnNext.style.display='inline-block';
+  }else{
+    btnNext.textContent='Ver Gabarito';
+    btnNext.style.display='inline-block';
+  }
+});
+
+btnNext.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<quiz.length){
+    loadQuestion();
+    btnNext.textContent='Próxima Questão';
+  }else{
+    showGabarito();
+  }
+});
+
+btnRestart.addEventListener('click',()=>{
+  currentQuestion=0;
+  userAnswers=[];
+  btnNext.textContent='Próxima Questão';
+  questionEl.style.display='';
+  optionsEl.style.display='';
+  feedbackEl.style.display='none';
+  gabaritoEl.style.display='none';
+  loadQuestion();
+});
+
+function showGabarito(){
+  questionEl.style.display='none';
+  optionsEl.style.display='none';
+  feedbackEl.style.display='none';
+  btnConfirm.style.display='none';
+  btnNext.style.display='none';
+
+  gabaritoEl.style.display='block';
+  gabaritoEl.innerHTML='<h2>Gabarito e explicações</h2>';
+
+  // **SALVA PONTUAÇÃO NO LOCALSTORAGE**
+  let correctCount = userAnswers.reduce((acc,ans,idx)=> acc + (ans===quiz[idx].answer?1:0),0);
+  let percent = Math.round((correctCount/quiz.length)*100);
+  localStorage.setItem('score_'+quizId, percent);
+
+  quiz.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='g-item';
+    const userIdx = typeof userAnswers[i]!=='undefined'?userAnswers[i]:null;
+    const correctIdx = q.answer;
+    const userText = userIdx===null?'Não respondeu':q.options[userIdx];
+    const correctText = q.options[correctIdx];
+    const ok = userIdx===correctIdx;
+    const status = ok?`<span class="answer-correct">✔ Correta</span>`:`<span class="answer-wrong">✖ Incorreta</span>`;
+    div.innerHTML=`
+      <div class="meta"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div><span class="you">Sua resposta:</span> ${userText} ${userIdx!==null?'&nbsp;•&nbsp;'+status:''}</div>
+      <div><strong>Resposta correta:</strong> <span class="answer-correct">${correctText}</span></div>
+      <div class="explanation" style="margin-top:8px"><strong>Explicação:</strong> ${q.explanation}</div>
+    `;
+    gabaritoEl.appendChild(div);
+  });
+
+  const backRow=document.createElement('div');
+  backRow.style.marginTop='14px';
+  backRow.style.display='flex';
+  backRow.style.gap='10px';
+
+  const btnVoltar=document.createElement('button');
+  btnVoltar.className='btn btn-back';
+  btnVoltar.textContent='Voltar';
+  btnVoltar.title='Voltar (history.back())';
+  btnVoltar.addEventListener('click',()=>{
+    if(window.history.length>1) window.history.back();
+    else window.location.href='#';
+  });
+
+  const btnRefazer=document.createElement('button');
+  btnRefazer.className='btn';
+  btnRefazer.textContent='Refazer Quiz';
+  btnRefazer.addEventListener('click',()=>{
+    currentQuestion=0;
+    userAnswers=[];
+    gabaritoEl.style.display='none';
+    questionEl.style.display='';
+    optionsEl.style.display='';
+    loadQuestion();
+  });
+
+  backRow.appendChild(btnVoltar);
+  backRow.appendChild(btnRefazer);
+  gabaritoEl.appendChild(backRow);
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
