@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Geral</title>
+<style>
+  :root{
+    --bg:#f5f6fa;
+    --card:#ffffff;
+    --muted:#777;
+    --accent:#007bff;
+    --green:#28a745;
+    --red:#dc3545;
+    --green-bg:#d4edda;
+    --red-bg:#f8d7da;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    padding: 50px 16px;
+  }
+
+  .quiz-container {
+    width: 680px;
+    max-width: 95%;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15,20,30,0.06);
+    padding: 30px;
+  }
+
+  .quiz-header { margin-bottom: 18px; }
+  .quiz-header h1 { font-size: 22px; margin-bottom: 4px; }
+  .quiz-header p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .question { margin: 18px 0; font-weight: 600; font-size: 18px; }
+  .options { list-style: none; padding: 0; margin: 0; }
+
+  .option {
+    background: #fbfcfd;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(15,20,30,0.04);
+  }
+
+  .option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(15,20,30,0.04);
+    background: #f4f7fb;
+  }
+
+  .option.selected {
+    background: linear-gradient(180deg,#eef5ff, #f6fbff);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.08) inset;
+    outline: none;
+  }
+
+  .option.correct {
+    background: linear-gradient(180deg, #eef9f0, #f7fcf8);
+    border-left: 6px solid var(--green);
+    border-color: rgba(40,167,69,0.14);
+  }
+
+  .option.incorrect {
+    background: linear-gradient(180deg, #fff5f6, #fff8f9);
+    border-left: 6px solid var(--red);
+    border-color: rgba(220,53,69,0.08);
+    opacity: 0.98;
+  }
+
+  .feedback {
+    margin-top: 16px;
+    font-size: 15px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    box-shadow: 0 6px 18px rgba(15,20,30,0.03);
+  }
+
+  .feedback .icon { font-size: 20px; margin-top: 2px; }
+  .feedback.correct { background: var(--green-bg); color: #155724; border-left: 6px solid var(--green); }
+  .feedback.incorrect { background: var(--red-bg); color: #721c24; border-left: 6px solid var(--red); }
+
+  .explanation { margin-top: 10px; font-size: 14px; color: #222; line-height: 1.4; background: rgba(0,0,0,0.01); padding: 10px; border-radius: 8px; }
+
+  .btn-row { display:flex; gap:12px; margin-top: 18px; align-items:center; }
+  .btn { padding: 11px 20px; border: none; border-radius: 9px; background-color: var(--accent); color: white; cursor: pointer; font-size: 15px; transition: background .12s ease, transform .08s; }
+  .btn:hover { transform: translateY(-2px); background-color: #0056b3; }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-secondary { background: #6c757d; }
+  .btn-back { background: #000; color: #fff; }
+
+  .gabarito { margin-top: 20px; }
+  .gabarito h2 { margin: 0 0 12px 0; font-size: 20px; }
+  .g-item { border-radius: 10px; padding: 12px; margin-bottom: 12px; background: #fbfcfd; border: 1px solid rgba(15,20,30,0.04); }
+  .g-item .meta { font-size: 14px; margin-bottom: 8px; }
+  .g-item .meta .you { font-weight: 600; }
+  .answer-correct { color: var(--green); font-weight:700; }
+  .answer-wrong { color: var(--red); font-weight:700; }
+
+  @media (max-width:480px){ .quiz-container { padding: 18px; } .question { font-size:16px; } }
+</style>
+</head>
+<body>
+  <div class="quiz-container" role="application" aria-label="Questionário de Clínica Geral">
+    <div class="quiz-header">
+      <h1></h1>
+      <p></p>
+    </div>
+
+    <div class="question" id="questionText"></div>
+    <ul class="options" id="optionsList" aria-live="polite"></ul>
+
+    <div class="feedback" id="feedbackBox" role="status" aria-hidden="true">
+      <div class="icon" id="feedbackIcon">✔️</div>
+      <div>
+        <div id="feedbackTitle" style="font-weight:700"></div>
+        <div class="explanation" id="feedbackExplanation"></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-confirm" id="btnConfirm">Confirmar Resposta</button>
+      <button class="btn btn-next" id="btnNext" style="display:none;">Próxima Questão</button>
+      <button class="btn btn-secondary" id="btnRestart" style="display:none;">Refazer</button>
+    </div>
+
+    <div class="gabarito" id="gabaritoEl" style="display:none;"></div>
+  </div>
+
+<script>
+const quizId = 'Cl7'; // Identificador único deste quiz
+
+const quiz = [
+  {
+    "q": "Qual é a idade ideal para iniciar o programa de vacinação em filhotes de cães?",
+    "options": [
+      "A. 2 semanas",
+      "B. 6–8 semanas",
+      "C. 12 semanas",
+      "D. 16 semanas"
+    ],
+    "answer": 1,
+    "explanation": "A vacinação deve iniciar entre 6 e 8 semanas de idade, com reforços subsequentes para garantir imunidade adequada."
+  },
+  {
+    "q": "Qual medida preventiva reduz a incidência de dermatite alérgica por pulgas em cães?",
+    "options": [
+      "A. Banhos diários com shampoo neutro",
+      "B. Uso regular de ectoparasiticidas",
+      "C. Restrição alimentar",
+      "D. Exercício físico intenso"
+    ],
+    "answer": 1,
+    "explanation": "O uso contínuo de produtos antipulgas previne a infestação e, consequentemente, a dermatite alérgica associada."
+  },
+  {
+    "q": "Durante a consulta de rotina, qual parâmetro é essencial para avaliação do estado nutricional do animal?",
+    "options": [
+      "A. Temperatura corporal",
+      "B. Condição corporal e palpação de gordura subcutânea",
+      "C. Frequência respiratória",
+      "D. Frequência de defecação"
+    ],
+    "answer": 1,
+    "explanation": "A condição corporal permite estimar se o animal está em peso ideal, sobrepeso ou subnutrido, orientando ajustes na dieta."
+  },
+  {
+    "q": "Em consultas preventivas de gatos, qual é o exame fundamental para detecção precoce de doença renal crônica?",
+    "options": [
+      "A. Hemograma completo",
+      "B. Creatinina e SDMA (dimetilarginina simétrica)",
+      "C. Radiografia torácica",
+      "D. Exame oftalmológico"
+    ],
+    "answer": 1,
+    "explanation": "A dosagem de creatinina e SDMA permite identificar lesão renal precoce, mesmo antes do surgimento de sintomas clínicos."
+  },
+  {
+    "q": "Qual é a importância da orientação sobre enriquecimento ambiental durante consultas de rotina?",
+    "options": [
+      "A. Estimular comportamento natural e prevenir estresse",
+      "B. Melhorar a estética do animal",
+      "C. Reduzir a necessidade de vacinas",
+      "D. Substituir exercícios físicos"
+    ],
+    "answer": 0,
+    "explanation": "O enriquecimento ambiental ajuda a reduzir estresse, prevenir comportamento destrutivo e manter saúde mental em gatos e cães."
+  },
+  {
+    "q": "Qual é a frequência recomendada para avaliação dentária em cães e gatos adultos saudáveis?",
+    "options": [
+      "A. A cada 6 meses",
+      "B. A cada 12 meses",
+      "C. Apenas quando houver mau hálito",
+      "D. Não é necessária avaliação"
+    ],
+    "answer": 1,
+    "explanation": "Exames dentários anuais ajudam na detecção precoce de doenças periodontais, prevenindo complicações sistêmicas."
+  },
+  {
+    "q": "Durante consultas preventivas, por que é importante revisar o calendário vacinal de animais adultos?",
+    "options": [
+      "A. Para evitar excesso de vacinas",
+      "B. Para garantir imunidade contínua contra doenças preveníveis",
+      "C. Para reduzir visitas ao veterinário",
+      "D. Apenas para fins legais"
+    ],
+    "answer": 1,
+    "explanation": "Manter vacinas atualizadas garante imunidade duradoura e protege contra doenças infecciosas."
+  },
+  {
+    "q": "Qual prática de manejo alimentar ajuda a prevenir obesidade em cães e gatos domésticos?",
+    "options": [
+      "A. Oferecer alimentos à vontade",
+      "B. Controle de porções, dieta balanceada e alimentação programada",
+      "C. Somente fornecer petiscos",
+      "D. Alimentar exclusivamente com restos humanos"
+    ],
+    "answer": 1,
+    "explanation": "Controle de porções e alimentação adequada previne ganho de peso excessivo e suas consequências para saúde."
+  },
+  {
+    "q": "Qual medida preventiva reduz o risco de infecções urinárias recorrentes em fêmeas caninas e felinas?",
+    "options": [
+      "A. Restrição hídrica",
+      "B. Higiene adequada, ingestão de água suficiente e monitoramento do trato urinário",
+      "C. Exercícios de alta intensidade",
+      "D. Uso de coleiras especiais"
+    ],
+    "answer": 1,
+    "explanation": "Manter boa higiene e hidratação adequada ajuda a prevenir infecções do trato urinário recorrentes."
+  },
+  {
+    "q": "Durante consultas preventivas, qual é a utilidade do exame físico completo em animais aparentemente saudáveis?",
+    "options": [
+      "A. Apenas confirmar peso e altura",
+      "B. Detectar sinais precoces de doenças, alterações ortopédicas ou sistêmicas",
+      "C. Determinar a cor do pelo",
+      "D. Avaliar somente comportamento"
+    ],
+    "answer": 1,
+    "explanation": "O exame físico completo permite identificar alterações precoces, possibilitando intervenção antes do aparecimento de sinais clínicos evidentes."
+  }
+];
+
+
+
+
+let currentQuestion = 0;
+let selectedOption = null;
+let locked = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('questionText');
+const optionsEl = document.getElementById('optionsList');
+const feedbackEl = document.getElementById('feedbackBox');
+const feedbackTitle = document.getElementById('feedbackTitle');
+const feedbackIcon = document.getElementById('feedbackIcon');
+const feedbackExplanation = document.getElementById('feedbackExplanation');
+const btnConfirm = document.getElementById('btnConfirm');
+const btnNext = document.getElementById('btnNext');
+const btnRestart = document.getElementById('btnRestart');
+const gabaritoEl = document.getElementById('gabaritoEl');
+
+function loadQuestion() {
+  locked = false;
+  selectedOption = null;
+  const q = quiz[currentQuestion];
+  questionEl.textContent = `Q${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML = '';
+  feedbackEl.style.display = 'none';
+  feedbackEl.setAttribute('aria-hidden','true');
+  btnConfirm.style.display = 'inline-block';
+  btnNext.style.display = 'none';
+  btnRestart.style.display = 'none';
+
+  q.options.forEach((opt,index)=>{
+    const li = document.createElement('li');
+    li.className = 'option';
+    li.tabIndex = 0;
+    li.setAttribute('role','button');
+    li.setAttribute('data-index', index);
+    li.innerHTML = `<span style="flex:1">${opt}</span>`;
+    const onSelect = ()=>{
+      if(locked) return;
+      optionsEl.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+      li.classList.add('selected');
+      selectedOption = index;
+    };
+    li.addEventListener('click',onSelect);
+    li.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onSelect(); }
+    });
+    optionsEl.appendChild(li);
+  });
+
+  if(typeof userAnswers[currentQuestion]!=='undefined'&&userAnswers[currentQuestion]!==null){
+    const pre = userAnswers[currentQuestion];
+    const preLi = optionsEl.querySelector(`.option[data-index="${pre}"]`);
+    if(preLi) preLi.classList.add('selected');
+    selectedOption = pre;
+  }
+}
+
+btnConfirm.addEventListener('click',()=>{
+  if(selectedOption===null){
+    btnConfirm.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-4px)' }, { transform: 'translateY(0)' }], { duration: 220 });
+    return;
+  }
+  locked=true;
+  const correctIndex = quiz[currentQuestion].answer;
+  const optionsLi = optionsEl.querySelectorAll('.option');
+
+  optionsLi.forEach((li,index)=>{
+    li.classList.remove('selected');
+    if(index===correctIndex) li.classList.add('correct');
+    if(index===selectedOption && index!==correctIndex) li.classList.add('incorrect');
+    li.style.pointerEvents='none';
+  });
+
+  userAnswers[currentQuestion] = selectedOption;
+
+  if(selectedOption===correctIndex){
+    feedbackTitle.textContent='Correto!';
+    feedbackIcon.textContent='✔️';
+    feedbackEl.className='feedback correct';
+  }else{
+    feedbackTitle.textContent='Incorreto';
+    feedbackIcon.textContent='❌';
+    feedbackEl.className='feedback incorrect';
+  }
+
+  feedbackExplanation.innerHTML=`<strong>Por que:</strong> ${quiz[currentQuestion].explanation}`;
+
+  feedbackEl.style.display='flex';
+  feedbackEl.setAttribute('aria-hidden','false');
+
+  btnConfirm.style.display='none';
+  if(currentQuestion<quiz.length-1){
+    btnNext.style.display='inline-block';
+  }else{
+    btnNext.textContent='Ver Gabarito';
+    btnNext.style.display='inline-block';
+  }
+});
+
+btnNext.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<quiz.length){
+    loadQuestion();
+    btnNext.textContent='Próxima Questão';
+  }else{
+    showGabarito();
+  }
+});
+
+btnRestart.addEventListener('click',()=>{
+  currentQuestion=0;
+  userAnswers=[];
+  btnNext.textContent='Próxima Questão';
+  questionEl.style.display='';
+  optionsEl.style.display='';
+  feedbackEl.style.display='none';
+  gabaritoEl.style.display='none';
+  loadQuestion();
+});
+
+function showGabarito(){
+  questionEl.style.display='none';
+  optionsEl.style.display='none';
+  feedbackEl.style.display='none';
+  btnConfirm.style.display='none';
+  btnNext.style.display='none';
+
+  gabaritoEl.style.display='block';
+  gabaritoEl.innerHTML='<h2>Gabarito e explicações</h2>';
+
+  // **SALVA PONTUAÇÃO NO LOCALSTORAGE**
+  let correctCount = userAnswers.reduce((acc,ans,idx)=> acc + (ans===quiz[idx].answer?1:0),0);
+  let percent = Math.round((correctCount/quiz.length)*100);
+  localStorage.setItem('score_'+quizId, percent);
+
+  quiz.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='g-item';
+    const userIdx = typeof userAnswers[i]!=='undefined'?userAnswers[i]:null;
+    const correctIdx = q.answer;
+    const userText = userIdx===null?'Não respondeu':q.options[userIdx];
+    const correctText = q.options[correctIdx];
+    const ok = userIdx===correctIdx;
+    const status = ok?`<span class="answer-correct">✔ Correta</span>`:`<span class="answer-wrong">✖ Incorreta</span>`;
+    div.innerHTML=`
+      <div class="meta"><strong>Q${i+1}.</strong> ${q.q}</div>
+      <div><span class="you">Sua resposta:</span> ${userText} ${userIdx!==null?'&nbsp;•&nbsp;'+status:''}</div>
+      <div><strong>Resposta correta:</strong> <span class="answer-correct">${correctText}</span></div>
+      <div class="explanation" style="margin-top:8px"><strong>Explicação:</strong> ${q.explanation}</div>
+    `;
+    gabaritoEl.appendChild(div);
+  });
+
+  const backRow=document.createElement('div');
+  backRow.style.marginTop='14px';
+  backRow.style.display='flex';
+  backRow.style.gap='10px';
+
+  const btnVoltar=document.createElement('button');
+  btnVoltar.className='btn btn-back';
+  btnVoltar.textContent='Voltar';
+  btnVoltar.title='Voltar (history.back())';
+  btnVoltar.addEventListener('click',()=>{
+    if(window.history.length>1) window.history.back();
+    else window.location.href='#';
+  });
+
+  const btnRefazer=document.createElement('button');
+  btnRefazer.className='btn';
+  btnRefazer.textContent='Refazer Quiz';
+  btnRefazer.addEventListener('click',()=>{
+    currentQuestion=0;
+    userAnswers=[];
+    gabaritoEl.style.display='none';
+    questionEl.style.display='';
+    optionsEl.style.display='';
+    loadQuestion();
+  });
+
+  backRow.appendChild(btnVoltar);
+  backRow.appendChild(btnRefazer);
+  gabaritoEl.appendChild(backRow);
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
